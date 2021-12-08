@@ -1,0 +1,111 @@
+% !TEX program = lualatex
+% !TEX root = ./catbook.tex
+
+\documentclass[ structure      = book
+              , maketitlestyle = standard
+              , chapstyle      = parcenter
+              , tocchapfont    = smallcaps
+              , secstyle       = left
+              , secfont        = roman
+              , liststyle      = aligned
+              , quotesize      = normalsize
+              , headerstyle    = center
+              ]{suftesi}
+
+% eliminare alcuni noiosi warnings...
+%\usepackage{silence}
+%\WarningFilter[xcol]{xcolor}{Incompatible color definition}
+%\ActivateWarningFilters[xcol]
+
+% dimensioni dei glifi flessibili
+\usepackage{anyfontsize}
+
+% gestione dei font
+\usepackage[no-math]{fontspec}
+\setmainfont{Linux Libertine O}
+
+% gestione lingue
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+
+% virgolette
+\usepackage[italian = quotes]{csquotes}
+\newcommand\q\enquote
+
+% riferimenti incrociati
+\usepackage{hyperref}
+\hypersetup{ breaklinks
+           , hidelinks
+           , linktoc = page
+           }
+\newcommand\mail[1]{\href{mailto:#1}{{\ttfamily #1}}}
+
+% bibliografia
+\usepackage[style = alphabetic-verb]{biblatex}
+\addbibresource{mybib.bib}
+
+% indice analitico
+\usepackage{imakeidx}
+\makeindex[columns=2]
+
+% tabelle
+\usepackage{booktabs}
+
+% liste
+%\setlist[itemize]{ label = \textbullet }
+
+% didascalie immagini
+%\captionsetup{ format = hang
+%             , font   = small
+%}
+
+% testo su più colonne
+\usepackage{multicol}
+
+%%% MATEMATICA
+
+%% Font
+\usepackage{ libertinust1math
+           , MnSymbol
+           , mathtools
+           , extarrows
+           , amsthm
+           }
+\usepackage[bb=ams,cal=cm,calscaled=.94]{mathalfa}
+
+%% Definizioni, teoremi, esempi, esercizi, osservazioni...
+\newcounter{cat}                           % nuovo contatore
+\counterwithin{cat}{chapter}
+\theoremstyle{definition}                  % stile usato per amsthm
+\newtheorem{definizione}[cat]{Definizione} % definizioni
+\newtheorem{costruzione}[cat]{Costruzione} % costruzioni
+\newtheorem{teorema}[cat]{Teorema} 	       % teoremi
+\newtheorem{esempio}[cat]{Esempio}         % esempi
+\newtheorem{nota}[cat]{Nota}               % note
+\newtheorem{notazione}[cat]{Notazione}     % notazioni
+\newtheorem{esercizio}[cat]{Esercizio}     % esercizi
+\newtheorem{evasione}[cat]{Evasione}       % evasioni
+
+\newcommand\nextcat{\stepcounter{cat}\arabic{chapter}.\arabic{cat}}
+
+\newcommand\perlettore{{\scshape Esercizio~\nextcat}}
+
+\renewcommand\theequation{\thechapter.\arabic{equation}}
+
+%% Diagrammi commutativi
+\usepackage{tikz}
+\usetikzlibrary{ calc
+               , babel
+               , cd
+               }
+\tikzcdset{ row sep/normal=.7cm
+          , column sep/normal=.7cm
+          , arrow style=tikz
+          , diagrams={>={To[length=3.5pt,width=4pt]}}
+          , shorten=-2pt                             
+          , natural/.style={shorten=2pt, Rightarrow}
+          , u func/.style={bend left=35, r}
+          , l func/.style={bend right=35, r, swap}
+          }
+
+\usepackage{bbding}

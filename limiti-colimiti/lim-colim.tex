@@ -1,0 +1,32 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Limiti e colimiti}
+
+\begin{definizione}[Limiti e colimiti]
+Siano \(\catC\) ed \(\bfI\) due categorie.
+%
+\begin{itemize}
+\item Un {\em diagramma} di forma \(\bfI\) è un funtore \(D : \bfI \to \catC\). {\color{red} [Un\dots{} {\em codiagramma} o {\em diagramma duale}?]}
+\item Sia \(v \in \obj\catC\) e il funtore \(k_v : \bfI \to \catC\) che manda qualsiasi oggetto di \(\bfI\) in \(v\) e qualsiasi freccia di \(\bfI\) in \(\id_v\). Un {\em cono} sopra \(D\) di vertice \(v\) è una qualsiasi trasformazione naturale
+\[\begin{tikzcd}
+\bfI \ar["{k_v}"{name=kv}, u func] \ar["D"{name=D}, l func] & \catC
+\ar[natural, from=kv, to=D]
+\end{tikzcd}.\]
+Dualmente, un {\em cocono} sotto \(D\) di vertice \(v\) è una qualsiasi trasformazione naturale
+\[\begin{tikzcd}
+\bfI \ar["D"{name=D}, u func] \ar["{k_v}"{name=kv}, l func] & \catC
+\ar[natural, from=D, to=kv]
+\end{tikzcd}.\]
+{\color{red} [Dare la definizione di cocono attraverso diagrammi duali?]}
+\item Un {\em limite} di \(D\) è un cono \(\set{L \functo{\lambda_i} D(i)}_{i \in \obj\bfI}\) su \(D\) tale che per ogni cono \(\set{A \functo{\alpha_i} D(i)}_{i \in \obj\bfI}\) su \(D\) si ha che esiste una e una sola freccia \(h : A \to L\) di \(\catC\) per la quale commuta
+\[\begin{tikzcd}[row sep=tiny]
+A \ar["{\alpha_i}", dr] \ar["h", swap, dd] &      \\
+                                           & D(i) \\
+L \ar["{\lambda_i}", swap, ur]
+\end{tikzcd}\]
+per ogni \(i \in \obj\bfI\). {\color{red} [Da dare ancora la nozione di colimite\dots{}]}
+\end{itemize}
+%
+\end{definizione}

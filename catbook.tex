@@ -1,0 +1,64 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+
+\input{struttura.tex}
+\input{macros.tex}
+
+\hypersetup{
+	pdftitle={Note di Teoria delle Categorie},
+	pdfauthor={Indrjo Dedej}
+}
+
+\title{Note di Teoria delle Categorie}
+\author{Indrjo Dedej}
+
+\begin{document}
+
+\frontmatter %-------------------------------------------------------------
+
+\input{front/titolo.tex}
+%\maketitle
+
+\tableofcontents
+
+\mainmatter %--------------------------------------------------------------
+
+\chapter{Categorie}
+\input{categorie/definizioni.tex}
+\input{categorie/diagrammi.tex}
+\input{categorie/esempi.tex}
+\input{categorie/costruzioni.tex}
+\input{categorie/iso-mono-epi.tex}
+\input{categorie/duale.tex}
+
+\chapter{Funtori}
+\input{funtori/definizioni.tex}
+\input{funtori/esempi.tex}
+\input{funtori/costruzioni.tex}
+\input{funtori/equivalenza.tex}
+
+\chapter{Trasformazioni Naturali}
+\input{naturalezza/definizioni.tex}
+
+\chapter{Limiti e colimiti}
+\input{limiti-colimiti/terminali-iniziali.tex}
+\input{limiti-colimiti/prodotti-coprodotti.tex}
+\input{limiti-colimiti/pullbacks-pushouts.tex}
+\input{limiti-colimiti/equalizzatori-coequalizzatori.tex}
+\input{limiti-colimiti/lim-colim.tex}
+\input{limiti-colimiti/completezza.tex}
+
+\chapter{Aggiunzioni}
+\input{aggiunzioni/definizione.tex}
+
+\backmatter %--------------------------------------------------------------
+
+\cleardoublepage
+
+\printbibliography
+
+%\newgeometry{margin=3cm}
+\printindex                 % indice analitico
+%\restoregeometry
+
+\end{document}

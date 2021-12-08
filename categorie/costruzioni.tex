@@ -1,0 +1,143 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Costruzioni}
+
+Questa è la sezione delle prime costruzioni categoriali.
+
+\begin{costruzione}[Categorie duali]\label{costr:DualCat}
+Data una categoria \(\catC\), la corrispondente {\em categoria duale} od {\em opposta}\index{categoria duale}, indicata con \(\op\catC\), è fatta come segue.
+
+\begin{itemize}
+\item \(\catC\) e \(\op\catC\) hanno gli stessi oggetti, ovvero
+\[\obj{\op\catC} \coloneq \obj\catC .\]
+\item le frecce di \(\op\catC\) da \(x\) a \(y\) sono precisamente le frecce \(y \to x\) di \(\catC\), ovvero formalmente
+\[\op\catC(x, y) \coloneq \catC(y, x) .\]
+Si noti che nella duale si trovano esattamente le stesse frecce della categoria di partenza, solo che si stabilisce costruttivamente che \q{essere una freccia \(x \to y\) di \(\op\catC\)} significa \q{essere una freccia \(y \to x\) di \(\catC\)}. In tal senso, ad uno stesso nome di freccia corrispondono due \q{versi di percorrenza} opposti: \(f\) è freccia \(a \to b\) di \(\catC\) se e solo se \(f\) è freccia \(b \to a\) di \(\op\catC\).
+\item Prese due frecce \(f : x \to y\) e \(g : y \to z\) di \(\op\catC\), la composizione \(gf\) in \(\op\catC\) è precisamente la freccia \(\catC\) di \(\catC\). Questo è coerente a pensarci bene: \(f\) e \(g\) secondo \(\catC\) sono frecce \(y \to x\) e \(z \to y\) rispettivamente, e quindi in \(\catC\) è sensata la composizione \(fg\). Notare però che, imponendo \(gf = fg\), non vogliamo dire che la composizione è commutativa, ma
+\[\underbrace{gf}_{\substack{\text{intesa come} \\ \text{composizione in } \op\catC}} \coloneq \underbrace{fg}_{\substack{\text{intesa come} \\ \text{composizione in } \catC}} .\]
+In effetti, delle ambiguità potrebbero sorgere dal fatto che abbiamo rinunciato ad usare dei simboli per denotare le composizioni. Uno, se si trova più a suo agio, può usare dei simboli diversi per denotare le composizioni: ad esempio, se le composizioni in \(\catC\) vengono indicate con \(\circ\), uno potrebbe indicare le composizioni in \(\op\catC\) con \(\op\circ\), e quindi dare questa definizione:
+\[g \op\circ f \coloneq f \circ g .\]
+Comunque sia, questa incertezza notazionale si supera presto abituandosi a capire e tenere a mente il contesto in cui avvengono le composizioni.
+\end{itemize}
+%
+Verifichiamo gli assiomi categoriali. Usiamo pure i simboli \(\circ\) e \(\op\circ\) per maggiore chiarezza. Se abbiamo tre frecce \(f\), \(g\) e \(h\) di \(\op\catC\) componibili, allora
+\[h \op\circ (g \op\circ f) = (f \circ g) \circ h = f \circ (g \circ h) = (h \op\circ g) \op\circ f ,\]
+e quindi la proprietà associativa è verificata. Facciamo notare che al primo e ultimo membro le frecce sono viste come all'interno di \(\op\catC\), mentre in quelli di mezzo, sono viste come frecce di \(\catC\). Poi per ogni freccia \(p\) di \(\op\catC\) con codominio \(x\) si ha
+\[\id_x \op\circ p = p \circ \id_x = p\]
+e per ogni freccia \(q\) di \(\op\catC\) con dominio \(x\) si ha
+\[q \op\circ \id_x = \id_x \circ q = q .\]
+Anche in questa sede, sottolineamo che la freccia \(p\) di \(\op\catC\) con codominio \(x\) in \(\catC\), invece, è una freccia con dominio \(x\); analogamente, se \(q\) in \(\op\catC\) ha dominio \(x\), in \(\catC\) ha \(x\) come codominio.
+\end{costruzione}
+
+\begin{nota}
+È immediato notare che \(\op{\left(\op\catC\right)}\) è proprio \(\catC\).
+\end{nota}
+
+\begin{esercizio}
+Preso un insieme preordinato \((X, \leqslant)\), visto come una categoria cos'è \(\op X\)?
+\end{esercizio}
+
+\begin{costruzione}[Categorie prodotto]
+Siano \(\catA\) e \(\catB\) due categorie. La {\em categoria prodotto}\index{categoria prodotto} \(\catA \times \catB\) è così descritta.
+\begin{itemize}
+\item Poniamo \(\obj{\catA \times \catB} = \obj\catA \times \obj\catB\).
+\item Le frecce da \((x,y)\) a \((x',y')\) sono tutte e sole le coppie \((f,g)\) con \(f : x \to x'\) e \(g : y \to y'\) frecce in \(\catA\) e \(\catB\) rispettivamente:
+\[(\catA \times \catB)\big((x, y), (x', y')\big) \coloneq \catA(x, x') \times \catB(y, y') .\]
+\item Date due frecce
+%
+\[(x, y) \functo{(f, g)} (x', y') \functo{(f', g')} (x'', y'')\]
+%
+di \(\catA \times \catB\), la composizione avviene in questo modo
+\[\underbrace{(f',g')(f,g)}_{\text{composizione in }\catA \times \catB} \coloneq (\underbrace{f'f}_{\text{composizione in }\catA}, \underbrace{g'g}_{\text{composizione in }\catB}) .\]
+\end{itemize}
+Per essere chiamata categoria a buon diritto, questo prodotto tra categorie deve soddisfare gli assiomi categoriali. Facciamo vedere anzitutto l'associatività della composizione:
+\begin{align*}
+& ((h,h')(g,g'))(f,f') = (hg,h'g')(f,f') = \\
+& = ((hg)f, (h'g')f') = (h(gf), h'(g'f')) = \\
+& = (h,h')(gf,g'f') = (h,h')((g,g')(f,f'))\,,
+\end{align*}
+dove, ovviamente, all'inizio di questa catena di uguaglianze hanno senso le composizioni. E \((\id_x,\id_y)\) è l'identità su \((x,y)\): infatti, per ogni freccia \((u,v)\) con dominio \((x,y)\) si ha
+\[(u,v) (\id_x,\id_y) = (u \id_x, v \id_y) = (u,v)\]
+mentre per ogni freccia \((h,k)\) con codominio \((x,y)\) si ha
+\[(\id_x,\id_y)(h,k) = (\id_x h, \id_y k) = (h,k) .\]
+E una volta constatato ciò, possiamo dire che \(\id_{(x,y)} = (\id_x,\id_y)\).
+\end{costruzione}
+
+\begin{esercizio}
+Descrivere \(\op\catA\times\op\catB\).
+\end{esercizio}
+
+\begin{costruzione}[Categorie taglio e cotaglio]
+Prendiamo una categoria \(\catC\) ed un suo oggetto \(c\): costruiamo così due nuove categorie.\newline
+La {\em categoria taglio}\index{categoria taglio} \(\catC/c\) è così fatta:
+\begin{itemize}
+\item i suoi oggetti sono tutte e sole le frecce di \(\catC\) con codominio \(c\);
+\item le frecce da \(f : x \to c\) a \(g : y \to c\), oggetti di \(\catC/c\), sono tutte e sole le frecce \(h : x \to y\) di \(\catC\) tali che \(f = gh\), ovvero commuta
+\[\begin{tikzcd}[column sep = tiny]
+a \ar["f",dr,swap] \ar["h",rr] &   & y \ar["g",dl] \\
+                               & c &
+\end{tikzcd};\]
+\item date due frecce \(s\) e \(t\) come segue
+\[%\begin{tikzcd}
+\Big(x \functo{f} c\Big) \functo{s}%\ar["s",r] &
+\Big(y \functo{g} c\Big) \functo{t}%\ar["t",r] &
+\Big(z \functo{h} c\Big)
+%\end{tikzcd}
+,\]
+la composizione \(ts\) è esattamente la composizione \(ts\) in \(\catC\). In particolare, quest'ultima manda il dominio di \(f\) nel dominio di \(h\) ed è tale che \(f = h(ts)\).
+\end{itemize}
+%
+La {\em categoria cotaglio}\index{categoria cotaglio} \(c/\catC\) invece è così fatta:
+\begin{itemize}
+\item i suoi oggetti sono tutte e sole le frecce di \(\catC\) con dominio \(c\);
+\item le frecce da \(f : c \to x\) a \(g : c \to y\) sono tutte e sole le frecce \(h : x \to y\) di \(\catC\) tali che \(g = hf\), ovvero commuta
+\[\begin{tikzcd}[column sep = tiny]
+                     & c \ar["f", dl, swap] \ar["g", dr] &   \\
+a \ar["h", rr, swap] &                                   & y
+\end{tikzcd};\]
+\item in analogia a prima, date due frecce \(s\) e \(t\) come segue
+%
+\[\Big(c \functo{f} x\Big) \functo{s}
+\Big(c \functo{g} y\Big) \functo{t}
+\Big(c \functo{h} z\Big)\]
+%
+la composizione \(ts\) è esattamente la composizione \(ts\) in \(\catC\).
+\end{itemize}
+%
+È facile verificare che per entrambe valgono gli assiomi categoriali (\perlettore{}).
+\end{costruzione}
+
+\begin{esercizio}
+Cos'è \(\op{(\op\catC/c)}\)?
+\end{esercizio}
+
+\begin{costruzione}[Categorie freccia]
+Presa una categoria \(\catC\), costruiamo la {\em categoria freccia}\index{categoria freccia} \(\vec\catC\).
+\begin{itemize}
+\item I suoi oggetti sono tutte e sole le frecce in \(\catC\).
+\item Le frecce da \(f : a \to b\) a \(g : c \to d\) sono tutte e sole le coppie \((h,k)\) dove \(h : a \to c\) e \(k : b \to d\) sono frecce di \(\catC\) per le quali \(kf = gh\), ovvero commuta
+\[\begin{tikzcd}
+a \ar["f",d,swap] \ar["h",r] & c \ar["g",d] \\
+b \ar["k",r,swap]            & d
+\end{tikzcd}\]
+\item Prese due frecce componibili
+%
+\[\left(a \functo{f} b\right) \functo{(h, k)}
+\left(a' \functo{f'} b'\right) \functo{(h',k')}
+\left(a'' \functo{f''} b''\right),\]
+%
+diamo la composizione \q{per componenti}, ovvero in questo modo
+\[\underbrace{(h',k')(h, k)}_{\text{composizione in }\vec\catC} \coloneq (\underbrace{h'h}_{\text{composizione in }\catC}, \underbrace{k'k}_{\text{composizione in }\catC}) .\]
+\end{itemize}
+%
+La composizione è definita nel modo più immediato suggerito dal commutare del \q{rettangolo} esterno in
+\[\begin{tikzcd}
+a \ar["f",d,swap] \ar["h",r,swap] \ar["h'h",rr,bend left=30] &
+a \ar["f'",d] \ar["h'",r,swap] &
+a'' \ar["f''",d] \\
+b \ar["k",r] \ar["k'k",rr,swap,bend right=30] & b' \ar["k'",r] & b''
+\end{tikzcd}\]
+La verifica degli assiomi categoriali è lasciata ad esercizio (\perlettore{}).
+\end{costruzione}

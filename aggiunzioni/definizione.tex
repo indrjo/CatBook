@@ -1,0 +1,28 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Definizione}
+
+\begin{definizione}[Aggiunzioni]
+Sia \(\catC\) e \(\catD\) due categorie e due funtori
+\[\begin{tikzcd}
+\catC \ar["L", r, shift left] & \catD \ar["R", l, shift left]
+\end{tikzcd}.\]
+Un {\em aggiunzione} da \(L\) a \(R\) è un isomorfismo naturale
+\begin{equation}\begin{tikzcd}
+\op\catC \times \catD \ar["{\hom_\catC(-, R(\cdot))}"{name=A}, u func] \ar["{\hom_\catC(L(-), \cdot)}"{name=B}, l func] & \Set \ar[natural, from=A, to=B]
+\end{tikzcd}.\label{eqn:AdjointSit}\end{equation}
+Scriveremo \(L \dashv R\) per indicare che c'è una una aggiunzione da \(L\) a \(R\); in tal caso, diciamo che \(L\) è l'{\em aggiunto sinistro} mentre \(R\) quello {\em destro}.
+\end{definizione}
+
+Per una trattazione il più generale possibile possiamo usare una notazione molto più leggera: per \(a \in \catC\), \(b \in \catD\) e \(f \in \hom_\catC(a, R(b))\), indichiamo con \(\bar f \in \hom_\catD(L(a), b)\) l'unica freccia che corrisponde a \(f\) attraverso l'isomorfismo naturale~\ref{eqn:AdjointSit}; analogamente, per \(c \in \catD\), \(d \in \catC\) e \(g \in \hom_\catD(L(c), d)\), indichiamo con \(\bar g \in \hom_\catC(c, R(d))\) l'unica freccia che corrisponde a \(g\) attraverso l'isomorfismo naturale~\ref{eqn:AdjointSit}.
+\begin{align*}
+& \bar{a \functo{f} R(b)} = \left( L(a) \functo{\bar f} b \right) \\
+& \bar{L(c) \functo{g} d} = \left( c \functo{\bar g} R(d) \right)
+\end{align*}
+Il fatto che una aggiunzione sia un isomorfismo naturale implica che non ci sia verso privilegiato tra
+\[\hom_\catC(x, R(y)) \to \hom_\catD(L(x), y)\]
+e
+\[\hom_\catD(L(x), y) \to \hom_\catC(x, R(y))\]
+con \(x \in \catC\) e \(y \in \catD\). Indicando tutte queste funzione con la barra, potrebbe creare un po' di confusione, ma questa si elimina facilmente tenendo conto da dove si parte e dove si arriva.

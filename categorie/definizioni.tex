@@ -1,0 +1,102 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Definizione}
+
+\begin{figure}\centering
+\input{figure/ontologia.tex}
+\caption{\q{Ontologia} di una categoria: dare una categoria significa dare assieme questi dati.}
+\end{figure}
+
+\begin{esempio}
+Assumiamo che il lettore abbia almeno una vaga idea di cosa sia un insieme e cosa una funzione tra insiemi; in tal caso, se \(A\) e \(B\) sono due insiemi, per indicare una funzione \(f\) da \(A\) a \(B\) scriviamo \(f : A \to B\). Due funzioni si possono comporre: se abbiamo due funzioni \(f : A \to B\) e \(g : B \to C\), abbiamo anche la funzione \(g \circ f : A \to C\), che manda ciascun \(x \in A\) in \(g(f(x)) \in C\). L'operazione di composizione ha un paio di proprietà notevoli. La prima è che vale
+\begin{equation}
+(h \circ g) \circ f = h \circ (g \circ f) \label{eqn:Assoc}
+\end{equation}
+per ogni terna di funzioni \(f : A \to B\), \(g : B \to C\) e \(h : C \to D\). La seconda è che su ogni insieme \(A\) la funzione \(\id_A : A \to A\), \(\id_A(x) \coloneq x\) è tale che
+\begin{align}
+& f \circ \id_A = f \ \text{per ogni } f : A \to B \label{eqn:Id1} \\
+& \id_A \circ g = g \ \text{per ogni } g : C \to A \label{eqn:Id2} \,.
+\end{align}
+Quanto appena evidenziato fa la categoria degli insiemi.
+\end{esempio}
+
+\begin{esempio}[La categoria degli spazi topologici]
+Adesso spostiamo l'attenzione alla Topologia: qui abbiamo gli spazi topologici e le funzioni continue tra spazi topologici. Uno spazio topologico è precisamente un insieme in cui si stabilisce quali sottoinsiemi sono aperti (ci sono degli assiomi ovviamente). Una funzione continua \(f : X \to Y\), con \(X\) e \(Y\) spazi topologici, è esattamente una funzione di insiemi \(f : X \to Y\) tale che per ogni aperto \(U\) di \(Y\) l'insieme \(\inv f U\) è un aperto di \(X\). Il primo fatto importante di tutto questo è: componendo due funzioni continue si ottiene una funzione continua, il che è molto rapido da provare. Visto che in primo luogo le funzioni continue sono funzioni di insiemi, vale anche per le funzioni continue la proprietà~\eqref{eqn:Assoc}. Anche la funzione identità è una funzione continua e si comporta come~\eqref{eqn:Id1} e~\eqref{eqn:Id2}.
+\end{esempio}
+
+\begin{esercizio}
+Si potrebbe fare lo stesso con i gruppi, gli spazi vettoriali, gli spazi misurabili, gli spazi di probabilità\dots{} Imita quello che abbiamo fatto, cioè rilevare una certa struttura.  
+\end{esercizio}
+
+Insomma, dovrebbe essere chiara l'idea di categoria che possiamo astrarre da questi esempi.
+%
+%Una categoria è un mondo organizzato su più livelli: abbiamo prima di tutto gli oggetti; da questi possono partire frecce verso altri oggetti o giungerne da altri; infine nuove frecce si possono formare componendo altre frecce; il tutto ovviamente deve comportarsi in una certa maniera. Le categorie sono dei laboratori, ambienti dedicati allo studio e allo sviluppo di fenomeni grandi e piccoli.
+
+\begin{definizione}[Categorie]\label{definizione:DefCat}
+Un {\em categoria}\index{categoria} \(\catC\) consiste di quanto segue:
+\begin{itemize}
+\item una collezione di {\em oggetti}, denotata con \(\obj\catC\)
+\item per ogni coppia di oggetti \(x\) e \(y\) di \(\catC\) di una collezione di {\em frecce} da \(x\) a \(y\), indicata con \(\catC(x,y)\)
+\item per ogni terna \(x\), \(y\) e \(z\) di oggetti di \(\catC\) una funzione
+\[\catC(y,z) \times \catC(x,y) \to \catC(x,z)\,, \quad (g,f) \to gf\]
+detta {\em composizione}
+\end{itemize}
+con i seguenti assiomi, che per noi sono gli {\em assiomi categoriali}\index{assiomi categoriali}:
+\begin{enumerate}%[label=(\roman*)]
+\item {\em associatività delle composizioni}: per ogni \(a, b, c, d \in \obj\catC\) e per ogni \(f \in \catC(a,b)\), \(g \in \catC(b,c)\) e \(h \in \catC(c,d)\) si ha che
+\[(hg)f = h(gf)\]
+\item {\em esistenza delle identità}: per ogni oggetto \(x \in \obj\catC\) esiste una freccia \(i \in \catC(x,x)\), {\em identità } su \(x\), tale che
+\begin{align*}
+if=f &\text{ per ogni } f \in \bigcup_{a \in \obj\catC}\catC(a,x) \\
+gi=g &\text{ per ogni } g \in \bigcup_{b \in \obj\catC}\catC(x,b) \,.
+\end{align*}
+\end{enumerate}
+\end{definizione}
+
+Come sempre, le notazioni possono variare. Alcuni scrivono \(x \in \catC\) per dire che \(x\) è un oggetto della categoria \(\catC\), invece del più corretto \(x \in \obj\catC\). Alcuni al posto di \(f \in \catC(x,y)\) scrivono \(f : x \to y\) lasciando intuire dal contesto in quale categoria si sta lavorando; quando tipograficamente sia possibile, esiste anche la scrittura
+\[x \functo{f} y .\]
+Senza contare che esiste anche la notazione \(\hom_\catC(x, y)\) per indicare \(\catC(x, y)\); anche qui, se il contesto è chiaro si può scrivere semplicemente \(\hom(x, y)\).
+
+Alcuni usano il simbolo \(\circ\) esplicitamente per indicare le composizioni, altri scrivono \(gf\) invece di \(g \circ f\), ritenendo che non sia possibile alcuna ambiguità di significato. Il punto è che ogni notazione ha i suoi vantaggi e svantaggi, e noi potremmo usarne di diverse.
+
+Se \(f \in \catC(x, y)\), gli oggetti \(x\) e \(y\) vengono chiamati {\em dominio} e {\em codominio} di \(f\), rispettivamente. Diremo che due frecce \(f\) e \(g\) sono {\em componibili} quando si può fare la composizione \(gf\), vale a dire quando il dominio di \(g\) è il codominio di \(f\). Generalizzando, delle frecce \(f_0, \dots{}, f_n\), con \(n \ge 1\), si dicono componibili quando il codominio di \(f_i\) è il dominio di \(f_{i+1}\) per ogni \(i \in \set{0, \dots{}, n-1}\).
+
+Essendo le composizioni associative, \((hg)f\) e \(h(gf)\) sono la stessa cosa, e questo elimina ogni ambiguità sul cosa si intende con \(hgf\); generalizzando ad un numero finito di composizioni, neppure la scrittura
+\[f_n f_{n-1}\cdots f_1f_0\]
+è fraintendibile (certo, viene più naturale effettuare le composizioni procedendo da sinistra a destra).
+
+\begin{nota}[Questioni di grandezza]
+Nella definizione~\ref{definizione:DefCat} abbiamo volutamente usato il termine vago di \q{collezione} per un motivo: non è affatto scontato che uno sia andato oltre la Teoria Na\"ive degli Insiemi (quelle nozioni elementari di insiemistica impartite all'Università, per esempio) e, a dire il vero, non è nemmeno pensabile pretendere ciò.\footnote{Una quasi provocazione: prendere un matematico a caso, e chiedergli se conosce gli assiomi di Von Neumann-Bernays-G\"odel o di Zermelo-Fraenkel.}\newline
+Se a qualcuno interessa, chi ha scritto queste pagine ha studiato la Teoria degli Insiemi alla Von Neumann-Bernays-G\"odel, in sigla NBG (vedi~\cite{berarducci:insiemi}). Per esempio, si potrebbe richiedere in definizione che in una categoria \(\catC\) la collezione \(\obj\catC\) sia una classe e che le collezioni \(\catC(a, b)\) insiemi, al variare di \(a, b \in \obj\catC\), lasciando tutto il resto della definizione~\ref{definizione:DefCat} invariato. Esistono poi altre impostazioni anche: ad esempio in~\cite{adamek-herrlich-strecker:cats} si contemplano addirittura i {\em conglomerati} che rendono possibili le {\em quasi-categorie}.\newline
+La domanda che uno potrebbe farsi allora è: per fare Teoria delle Categorie serve avere fatto una qualche Teoria Assiomatica degli Insiemi? Certamente male non fa, ma tendenzialmente non lo si considera un prerequisito stretto: sono ristretti, infatti, i punti in cui bisogna usare prudenza, per il resto si va abbastanza tranquilli.\newline
+Comunque sia, in queste pagine si adotta un approccio abbastanza spensierato rispetto a questi temi, come in~\cite{goldblatt:topoi} o in~\cite{leinster:category}.
+\end{nota}
+
+\begin{teorema}
+In una categoria, ogni oggetto ha a sé una sola identità. 
+\end{teorema}
+
+\begin{proof}
+Sia \(x\) un oggetto di una categoria qualsiasi (in questa sede non è necessario darle un nome) con l'identità \(u : x \to x\). Sia \(v : x \to x\) un'altra freccia della stessa categoria che sia un'identità su \(x\). Allora abbiamo che, applicando il secondo degli assiomi categoriali, \(u = u v = v\).
+\end{proof}
+
+%Questo teorema non dice che in tutta la categoria c'è un'unica identità, ma che ciascun oggetto ne ha una sola. L'unica identità su un dato oggetto \(x\) sarà indicata con \(\id_x\).
+
+\begin{esercizio}
+Eppure un teorema così semplice ha delle conseguenze non da poco: in una categoria \q{ci sono tanti oggetti quante sono le identità in tutta la categoria}; oppure, in termini dal sapore più matematico, esiste una biezione
+\[\obj\catC \to \set{\id_x}_{x \in \obj\catC} .\]
+E se si pensasse, proprio in virtù di questo fatto, di fare di ciascun oggetto e della sua identità la stessa cosa? In tal caso le conseguenze sulla definizione di categoria sarebbero che gli attori di una categoria si ridurrebbero a due: frecce e composizioni tra frecce. Fatti suggestionare da questa idea e prova a dare tu una definizione in questo senso.
+\end{esercizio}
+
+Vogliamo avere anche la nozione di sotto-categoria.
+
+\begin{definizione}[Sottocategorie]
+Data una categoria \(\catC\), una {\em sottocategoria}\index{sottocategoria} \(\catD\) di \(\catC\) è una categoria che consta di:
+\begin{itemize}
+\item una collezione di oggetti \(\obj\catD\subseteq\obj\catC\)
+\item per ogni coppia di oggetti \(x\) e \(y\) di \(\catD\) una collezione di frecce \(\catD(x,y) \subseteq \catC(x,y)\) chiusa composizioni (ovvero: per ogni coppia di frecce \(f\) e \(g\) di \(\catD\) componibili anche \(gf\) è una freccia di \(\catD\)).
+\end{itemize}
+La sottocategoria \(\catD\) è detta {\em piena}\index{sottocategoria piena} qualora \(\catD(x,y)=\catC(x,y)\) per ogni oggetto \(x\) e \(y\) di \(\catD\).
+\end{definizione}

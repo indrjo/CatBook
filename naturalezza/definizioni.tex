@@ -1,0 +1,106 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Definizione}
+
+È come se dopo aver passeggiato tra le categorie con i funtori, adesso si vuole pure camminare tra i funtori. Il leitmotiv è oramai chiaro: vogliamo avere una qualche nozione di frecce pure tra funtori.
+
+\begin{definizione}[Trasformazione naturale]\label{definition:NaturalTransformation}
+Prese due categorie \(\catC\) e \(\catD\) e dati due funtori \(F, G : \catC \to \catD\), una {\em trasformazione naturale}\index{trasformazione naturale} da \(F\) a \(G\) è una collezione di frecce di \(\catD\)
+\[\eta \coloneq \set{F(x) \functo{\eta_x} G(x)}_{x \in \obj\catC}\]
+(una e una sola per ciascun \(x \in \obj\catC\)) tale che
+\begin{equation}\begin{tikzcd}
+F(x) \ar["\eta_x", r] \ar["F(f)", d, swap] & G(x) \ar["G(f)", d] \\
+F(x) \ar["\eta_y", r ,swap] & G(x)
+\end{tikzcd}\label{eqn:Natural}\end{equation}
+commuta per ogni \(x, y \in \obj\catC\) e \(f \in \catC(x,y)\).
+Il commutare di~\eqref{eqn:Natural} prende il nome di {\em naturalezza} di \(\eta\). Ci sono vari modi di indicare una trasformazione naturale:
+\[\eta : F \tto G \ \text{oppure} \ \begin{tikzcd}
+\catC \ar["F"{name=F},u func] \ar["G"{name=G},l func] & \catD
+\ar["\eta",natural,from=F,to=G]
+\end{tikzcd}.\]
+\end{definizione}
+
+\begin{nota}
+Esiste anche una locuzione diversa per dire che \(F \cong G\):
+\begin{equation}
+F(x) \cong G(x) \text{ naturalmente in } x \in \obj\catC.\label{eqn:NaturallyIn}
+\end{equation}
+Attenzione che non si sta dicendo questo 
+\begin{equation}
+F(x) \cong G(x) \text{ per ogni } x \in \obj\catC.\label{eqn:CongForAll}
+\end{equation}
+La~\eqref{eqn:CongForAll} sancisce l'isomorfismo degli oggetti \(F(x)\) e \(G(x)\) di \(\catD\), al variare di \(x\) tra gli oggetti di \(\catC\); mentre con la~\eqref{eqn:NaturallyIn} vogliamo dire di più: non solo~\eqref{eqn:CongForAll}, ma anche la naturalezza della definizione~\ref{definition:NaturalTransformation}.
+\end{nota}
+
+Esiste un modo sensato di comporre due trasformazioni naturali: siano due trasformazioni naturali 
+\[\begin{tikzcd}
+\catC \ar["F"{name=F,description},r,bend left=70]
+      \ar["G"{name=G,description},r]
+      \ar["H"{name=H,description},r,bend right=70,swap] & \catD
+\ar[Rightarrow,from=F,to=G,"\zeta"] \ar[Rightarrow,from=G,to=H,"\theta"]
+\end{tikzcd}\]
+La collezione \(\theta\zeta \coloneq \set{\theta_x\zeta_x : F(x) \to H(x)}_{x \in \obj\catC}\) è davvero una trasformazione naturale: commuta infatti il rettangolo perimetrale qui sotto
+\[\begin{tikzcd}
+F(x) \ar["{\zeta_x}",r] \ar["F(f)",d,swap] &
+G(x) \ar["{\theta_x}",r] \ar["G(f)",d] &
+H(x) \ar["H(f)",d]\\
+F(y) \ar["{\zeta_y}",r,swap] &
+G(y) \ar["{\theta_y}",r,swap] &
+H(y)
+\end{tikzcd}\]
+per ogni freccia \(f : x \to y\) di \(\catC\). La trasformazione naturale identità \(\id_F : F \tto F\) è fatta come te lo potresti aspettare:
+\[\id_F = \set{\id_{F(x)} : F(x) \to F(x)}_{x \in \obj\catC}\,.\]
+Questo fatto ci porta a definire una nuova categoria.
+
+\begin{definizione}[Categoria funtore]
+Prese due categorie \(\catC\) e \(\catD\), la {\em categoria dei funtori} da \(\catC\) a \(\catD\) ha i funtori \(\catC \to \catD\) come oggetti, le trasformazioni naturali tra funtori come frecce e le composizioni di trasformazioni naturali sono definite come abbiamo visto poc'anzi. Indicheremo questa categoria con \([\catC, \catD]\). Gli isomorfismi di \([\catC, \catD]\) prendono il nome di {\em isomorfismi naturali}. In tal caso, \(F \cong G\) sta a significare che \(F\) è isomorfo a \(G\).
+\end{definizione}
+
+\begin{teorema}
+Siano \(\catC\) e \(\catD\) due categorie e i funtori \(F, G : \catC \to \catD\). Una trasformazione naturale
+\[\begin{tikzcd}
+\catC \ar["F"{name=F},u func] \ar["G"{name=G},l func] & \catD
+\ar["\eta",natural,from=F,to=G]
+\end{tikzcd}\]
+è un isomorfismo naturale se e solo se \(F(x) \functo{\eta_x} G(x)\) è un isomorfismo di \(\catD\) per ogni \(x \in \obj\catC\).
+\end{teorema}
+
+\begin{proof}
+Se \(\eta\) è un isomorfismo naturale, allora esiste una trasformazione naturale \(\theta : G \tto F\) tale che \(\theta\eta = \id_F\) e \(\eta\theta = \id_G\). Ovvero per ogni oggetto \(x\) di \(\catC\) si ha che \(\theta_x\eta_x = \id_{F(x)}\) e \(\eta_x\theta_x = \id_{G(x)}\).\newline
+Viceversa, sia la trasformazione naturale \(\eta\) tale che \(\eta_x : F(x) \to G(x)\) è un isomorfismo in \(\catD\) per ogni oggetto \(x\) di \(\catC\). Allora per ciascuna di queste frecce abbiamo \(\inv\eta_x : G(x) \to F(x)\) tale che \(\inv\eta_x \eta_x = \id_{F(x)}\) e \(\eta_x \inv\eta_x = \id_{G(x)}\). Si costruisce così una collezione
+\[\inv\eta := \set{\inv\eta_x}_{x \in \obj\catC}\]
+che però dobbiamo ancora verificare essere una trasformazione naturale \(G \tto F\). Essendo \(\eta\) una trasformazione naturale, abbiamo che per ogni freccia \(f : x \to y\) di \(\catC\) si ha \(G(f)\eta_x = \eta_yF(f)\), da cui segue che \(\inv\eta_y G(f) = F(f) \inv\eta_x\), cioè commuta il diagramma
+\[\begin{tikzcd}
+G(x) \ar["{\inv\eta_x}",r] \ar["G(f)",d,swap] & F(x) \ar["F(f)",d] \\
+G(y) \ar["{\inv\eta_y}",r,swap] & F(y)
+\end{tikzcd}.\]
+Questo basta per dire che \(\eta\) è un isomorfismo di \([\catC, \catD]\).
+\end{proof}
+
+\begin{esempio}[Il funtore di valutazione]
+{\color{red} [Questo per ora rimane qui.]}
+Siano \(\catC\) e \(\catD\) due categorie: abbiamo il {\em funtore di valutazione}
+\[\ev : \catC \times [\catC, \catD] \to \catD\]
+che su oggetti agisce come
+\[\ev(x, F) \coloneq F(x)\]
+mentre su frecce
+\[\ev\left(\begin{tikzcd}[row sep=small] x \ar["f", swap, d] \\ y \end{tikzcd},
+\begin{tikzcd} \catC \ar["F"{name=F}, u func] \ar["G"{name=G}, l func] & \catD \ar["\alpha", natural, from=F, to=G] \end{tikzcd}\right) \coloneq
+G(f)\alpha_x = \alpha_y F(f)\,.\]
+Mostriamo che effettivamente sia un funtore. {\color{red} [Da \TeX{}are ancora. Oppure no: come \q{esercizio per il lettore}?]}
+%\[\ev(\id_{(x, F)}) = \ev(\id_x, \id_F) = F(\id_x) \id_{F(x)} = \id_{\ev(x, F)}\]
+%e
+%\begin{align*}
+%\ev\left(
+%\begin{tikzcd}[row sep=small]x \ar["f", d] \\ y \ar["g", d] \\ z\end{tikzcd},
+%{\begin{tikzcd}[ampersand replacement=\&]
+%\catC \ar["F"{name=F, description}, r, bend left=80] \ar["G"{name=G, description}, r] \ar["H"{name=H, description}, swap, r, bend right=80] \& \catD \ar["\alpha", Rightarrow, from=F, to=G] \ar["\beta", Rightarrow, from=G, to=H]
+%\end{tikzcd}}
+%\right) & = H(gf)(\beta\alpha)_x = \\
+%& = H(g)H(f)\beta_x\alpha_x = \\
+%& = H(g)\beta_y G(f)\alpha_x = \\
+%& = ev(g, \beta) \ev(f, \alpha)\,.
+%\end{align*}
+\end{esempio}

@@ -1,0 +1,47 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Equalizzatori e coequalizzatori}
+
+\begin{definizione}[Equalizzatori e coequalizzatori]
+{\color{red} [Generalizzare con una generica collezione di frecce parallele?]}
+Sia \(\catC\) una categoria e \(a, b \in \obj\catC\). Un {\em equalizzatore} in \(\catC\) di due frecce
+\begin{equation}\begin{tikzcd}
+a \ar["f", r, shift left] \ar["g", swap, r, shift right] & b
+\end{tikzcd}\label{eqn:ParArr}\end{equation}
+di \(\catC\) è un \(e \in \obj\catC\) con una freccia \(i : e \to a\) tale che \(fi = gi\) con la seguente proprietà: per ogni \(d \in \obj\catC\) con una freccia \(j : d \to a\) di \(\catC\) tale che \(fj = gj\) esiste una e una sola freccia \(k : d \to e\) di \(\catC\) per cui commuta
+\[\begin{tikzcd}[row sep=tiny]
+d \ar["j", dr] \ar["k", swap, dd] &   \\
+                                  & a \\
+e \ar["i", swap, ur]              &          
+\end{tikzcd}\]
+Abbiamo il concetto duale: un {\em coequalizzatore} di~\eqref{eqn:ParArr} all'interno di \(\catC\) è esattamente un equalizzatore delle stesse frecce viste come frecce di \(\op\catC\).
+\end{definizione}
+
+\begin{esempio}
+Siamo in \(\Set\): presi due insiemi \(A\) e \(B\) e due funzioni
+\[\begin{tikzcd}
+A \ar["f", r, shift left] \ar["g", swap, r, shift right] & B
+\end{tikzcd}\]
+abbiamo l'{\em equalizzatore} delle due funzioni
+\[\eq(f, g) \coloneq \set{x \in A \mid f(x) = g(x)}.\]
+Il nome suggerisce che è un equalizzatore nel senso che vogliamo: \(\eq(f, g)\) con l'inclusione \(i : \eq(f, g) \hookrightarrow A\) è un equalizzatore di \(f\) e \(g\). Infatti presa un qualsiasi insieme \(C\) con una funzione \(j : C \to A\) tale che \(fj = gj\), la funzione
+\[h : C \to \eq(f, g)\,, \ h(x) = j(x)\]
+fa al caso nostro, ovvero fa commutare
+\[\begin{tikzcd}[row sep=small]
+C \ar["j", dr] \ar["h", swap, dd] \\
+ & A \\
+\eq(f, g) \ar["i", swap, ur]
+\end{tikzcd}.\]
+(Notare che la definizione di \(h\) è proprio possibile in quanto \(fj = gj\).) È immediato vedere che \(h\) è l'unica per cui le cose funzionano.
+\end{esempio}
+
+\begin{esercizio}[Pullbacks ed equalizzatori]
+Sia \(\catC\) una categoria. Se
+\[\begin{tikzcd}
+e \ar["i", r] \ar["i", swap, d] & a \ar["f", d] \\
+a \ar["g", swap, r]             & b
+\end{tikzcd}\]
+è un suo quadrato di pullback, allora \(e\) con \(i\) è un equalizzatore di \(f\) e \(g\)? È vero il viceversa? Esiste un'ovvia dualizzazione di questo esercizio.
+\end{esercizio}

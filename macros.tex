@@ -1,0 +1,84 @@
+% !TEX root = ./catbook.tex
+
+% lettere calligrafiche
+\newcommand\catA{\mathcal A}
+\newcommand\catB{\mathcal B}
+\newcommand\catC{\mathcal C}
+\newcommand\catD{\mathcal D}
+\newcommand\catG{\mathcal G}
+\newcommand\catS{\mathcal S}
+
+% lettere in neretto
+\newcommand\bfA{\mathbf A}
+\newcommand\bfB{\mathbf B}
+\newcommand\bfH{\mathbf H}
+\newcommand\bfI{\mathbf I}
+\newcommand\bfP{\mathbf P}
+
+% categorie notevoli
+\newcommand\Set{\mathbf{Set}}
+\newcommand\FinSet{\mathbf{FinSet}}
+\newcommand\pSet{\Set_\ast}
+\newcommand\Par{\mathbf{Par}}
+\newcommand\Ord{\mathbf{Ord}}
+\newcommand\FinOrd{\mathbf{FinOrd}}
+\newcommand\Rel{\mathbf{Rel}}
+\newcommand\Grp{\mathbf{Grp}}
+\newcommand\Rng{\mathbf{Rng}}
+\newcommand\Top{\mathbf{Top}}
+\newcommand\Vect[1][k]{\mathbf{Vect}_#1}
+\newcommand\FDVect[1][k]{\mathbf{FDVect}_#1}
+\newcommand\Mat[1][k]{\mathbf{Mat}_#1}
+\newcommand\Cat{\mathbf{Cat}}
+\newcommand\CAT{\mathbf{CAT}}
+\newcommand\Poset{\mathbf{Poset}}
+\newcommand\Dyn{\mathsf{Dyn}}
+
+% ulteriori notazioni
+\newcommand\nil\varnothing
+\newcommand\tto\Rightarrow
+\newcommand\lrarr\Leftrightarrow
+\newcommand\functo[1]{\xrightarrow{\ #1\ }}
+\newcommand\lfuncto[1]{\xleftarrow{\ #1\ }}
+\renewcommand\vec\overrightarrow
+\newcommand\tld\widetilde
+\renewcommand\bar\overline
+\newcommand\obj[1]{\lvert#1\rvert}
+\newcommand\id{\mathtt{1}}
+\newcommand\zero{\mathbf{0}}
+\newcommand\uno{\mathbf{1}}
+\newcommand\set[1]{\left\{#1\right\}}
+\newcommand\myop[1]{\text{\reflectbox{\(#1\)}}} % <- sperimentale...
+\newcommand\op[1]{#1^\text{op}}
+\newcommand\inv[1]{#1^{-1}}
+\newcommand\nupla[1]{\left(\begin{smallmatrix}#1\end{smallmatrix}\right)}
+\newcommand\sk{\operatorname{sk}}
+\newcommand\ev{\operatorname{ev}}
+
+\newcommand\eq{\operatorname{eq}}
+
+\newcommand\prj{\text{pr}}
+\newcommand\inj{\text{in}}
+
+% insiemi notevoli
+\newcommand\setN{\mathbb N}
+\newcommand\setR{\mathbb R}
+
+% \bullets colorati
+\newcommand\colbullet[1][black]{{\color{#1!65!black} \bullet}}
+
+% tikzcd
+\newcommand\upperFunc[2][30]{\ar["#2"{name=#2},r,bend left=#1]}
+\newcommand\lowerFunc[2][30]{\ar["#2"{name=#2},r,swap,bend right=#1]}
+\newcommand\natArr[3]{\ar[shorten=3pt,Rightarrow,from=#2,to=#3,"#1"]}
+
+% colori
+\newcommand\rosso{\color{red!50!black}}
+\newcommand\blu{\color{blue!50!black}}
+\newcommand\verde{\color{green!50!black}}
+\newcommand\arancio{\color{orange!50!black}}
+
+
+
+% altro
+\newcommand\fiore{{\scriptsize\FiveFlowerOpen}}

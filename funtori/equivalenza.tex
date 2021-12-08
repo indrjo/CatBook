@@ -1,0 +1,38 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Equivalenza funtoriale di categorie}
+
+Vogliamo avere con i funtori qualche nozione di iniettività e suriettività, sulle frecce però.
+
+\begin{definizione}[Funtori fedeli e pieni]
+Date due categorie \(\catA\) e \(\catB\), un funtore \(F : \catA \to \catB\) è detto {\em fedele}\index{funtore fedele} (rispettivamente {\em pieno}\index{funtore pieno}), se e solo se per ogni coppia di oggetti \(x\) e \(y\) di \(\catA\) la funzione
+\[\catA(x, y) \to \catB(F(x), F(y)),\, f \to F(f)\]
+è inettiva (rispettivamente suriettiva).
+\end{definizione}
+
+Abbiamo bisogno anche questa definizione.
+
+\begin{definizione}[Funtori essenzialmente suriettivi]
+Date due categorie \(\catA\) e \(\catB\), un funtore \(F : \catA \to \catB\) è detto {\em essenzialmente suriettivo sugli oggetti}\index{funtore essenzialmente suriettivo} qualora per ogni oggetto \(y\) di \(\catB\) si ha che esiste almeno uno oggetto \(x\) di \(\catA\) tale che \(F(x) \cong y\).
+\end{definizione}
+
+È il momento di dare una qualche nozione di equivalenze tra categorie. Quando due categorie possono considerarsi \q{essenzialmente la stessa cosa}? Non va bene l'isomorfismo tra categorie? Non tanto, perché se prendiamo un funtore \(F : \catA \to \catB\) isomorfismo, questo ci porterebbe all'esistenza di \(\inv F : \catB \to \catA\) tale che a \(\inv F F = \id_\catA\) e \(F \inv F = \id_\catB\), delle uguaglianze insomma. Ci serve qualcosa di \q{rilassato} quanto basta.
+
+Una buona nozione di equivalenza deve agire ovviamente su più livelli, sia su oggetti e che su frecce. Un funtore in questo senso sembra quello che fa al caso nostro, ma deve avere certe caratteristiche. Pretenderlo suriettivo sugli oggetti è troppo perché questo richiederebbe l'impiego dell'uguaglianza: lo vogliamo essenzialmente suriettivo allora. Deve essere anche fedele e pieno: infatti questo è equivalente al fatto che per ogni coppia di oggetti \(x\) e \(y\) di \(\catA\) si ha un biezione
+\[\catA(x, y) \to \catB(F(x), F(y)).\]
+
+\begin{definizione}[Categorie funtorialmente equivalenti]
+Una categoria \(\catA\) si dice {\em funtorialmente equivalente}\index{equivalenza di categorie} a una categoria \(\catB\) se e solo se esiste un funtore \(E : \catA \to \catB\) fedele, pieno ed essenzialmente suriettivo. In tal caso scriveremo \(\catA \simeq \catB\).
+\end{definizione}
+
+\begin{esercizio}[\(\FDVect \simeq \Mat\)]
+Un leitmotiv dell'Algebra Lineare è quello di passare dalle applicazioni lineari alle matrici, e viceversa, con molta spensieratezza, quasi senza avvisare a momenti, come se fossero la stessa cosa. In effetti sono essenzialmente la stessa cosa. Lo scopo di questo esercizio è di concludere quanto iniziato con l'esempio~\ref{esempio:DimIsFunctor}, formalizzando così questo atteggiamento: dimostra che \(\FDVect \simeq \Mat\). Notare anche quanto è molto meno contorto provare \(\Mat \simeq \FDVect\).
+\end{esercizio}
+
+\begin{esercizio}[\(\pSet \simeq \Par\)]
+Chiariamo anzi tutto i nostri protagonisti. \(\pSet\) è la {\em categoria degli insiemi puntati}: gli oggetti sono le coppie \((X, a)\) con \(X\) insieme e \(a \in X\); una freccia da \((X, a)\) a \((Y, b)\) è una funzione \(X \to Y\) che manda \(a\) in \(b\); date due frecce \(f : (X, a) \to (Y, b)\) e \(g : (Y, b) \to (Z, c)\), la composizione \(gf\) è una comune composizione di funzioni. \(\Par\) è la {\em categoria delle funzioni parziali}: gli oggetti sono insiemi; le frecce sono funzioni parziali\footnote{Una {\em funzione parziale} da un insieme \(A\) ad un altro insieme \(B\) è una funzione da qualche \(A' \subseteq A\) a \(B\).}; le composizioni sono praticamente composizioni di funzioni. Mostra che \(\pSet \simeq \Par\).
+\end{esercizio}
+
+

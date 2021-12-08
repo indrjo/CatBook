@@ -1,0 +1,26 @@
+% !TEX root = ../catbook.tex
+% !TEX program = lualatex
+
+\begin{tikzpicture}[cat/.style={ line width=1pt
+                               , rounded corners=2pt
+                               , gray
+                               }]
+\coordinate (C) at (0,0);
+\node (titolo) at (C) {categoria};
+\draw [cat] (titolo.south west) --(titolo.south east);
+\coordinate (radice) at (titolo.south);
+\foreach \i/\j/\k in { 1/A/oggetti
+                       , 2/B/frecce
+                       , 3/C/composizioni
+                       , 4/D/{assiomi categoriali}
+                     } {
+                         \draw [->, cat]
+                           (radice)
+                           -- ($(radice) + (0, -\i*13pt)$)
+                           -- ($(radice) + (8pt, -\i*13pt)$)
+                             coordinate (\j)
+                         ;
+                         \node [anchor=west] at (\j) {\k};
+                       }
+\end{tikzpicture}
+

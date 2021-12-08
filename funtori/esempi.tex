@@ -1,0 +1,86 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Esempi}
+
+Come nella scorsa sezione, facciamo degli esempi, giusto per rendersi conto che, tra le conoscenze che già si hanno, ci sono già queste idee: non resta che farle emergere.
+
+\begin{esempio}[Omomorfismi come funtori]
+Abbiamo visto nell'esempio~\ref{esempio:MonoidsAreCats} che un monoide è una categoria. Ci ricolleghiamo a questo per vedere come interpretare gli omomorfismi di monoidi come funtori.\newline
+Ricordiamo che dati due monoidi \(A\) e \(B\), un omomorfismo \(f\) da \(A\) a \(B\) è una funzione \(f : A \to B\) tale che
+\begin{itemize}
+\item \(f(\id_A) = \id_B\), dove \(\id_A\) e \(\id_B\) sono le identità di \(A\) e \(B\) rispettivamente
+\item per ogni \(x, y \in A\) si ha \(f(xy) = f(x)f(y)\).
+\end{itemize}
+Guardiamo ora i due monoidi come categorie ad un solo oggetto, chiamandoli \(\bullet_A\) e \(\bullet_B\) rispettivamente. Il comportamento di \(f\) rispetto alle frecce (gli elementi del monoide) è il secondo assioma di funtorialità. Basta imporre che \(f(\bullet_A) = \bullet_B\), e \(f\) è un funtore in piena regola.
+\end{esempio}
+
+%\begin{esercizio}
+%Una funzione di insiemi può essere pensata come un funtore. Dare i dettagli.
+%\end{esercizio}
+
+\begin{esempio}[Azioni su gruppi]
+Sia un gruppo \(G\), visto come una categoria ad un oggetto, e vediamo cosa può essere un funtore \(\phi : G \to \Set\). Da definizione, \(\phi\) manda l'unico oggetto di \(G\) in qualche insieme \(X\) e una freccia (un elemento) \(x\) di \(G\) in una funzione \(\phi(x) : X \to X\); ci sono assiomi di funtorialità anche: \(\phi(e)\), con \(e \in G\) l'elemento neutro, è la funzione identità di \(X\), e \(\phi(ab) = \phi(a)\phi(b)\). Sostanzialmente, un funtore \(\phi : G \to \Set\) si riduce ad un insieme \(X\) e con una collezione \(\set{\phi(x) : X \to X}_{x \in G}\) di funzioni; queste funzioni, poi, sono tutte biunivoche: infatti per ogni \(x \in G\) si ha 
+\[\id_X = \begin{cases} \phi(x)\phi(\inv x) \\ \phi(\inv x)\phi(x) \end{cases} \text{per funtorialità di } \phi .\]
+Il funtore \(\phi\) altro non è che un omomorfismo di gruppi \(G \to S(X)\), dove \(S(X) \coloneq \set{f : X \to X \text{ biunivoche}}\), che in Algebra prende il nome di {\em azione} di \(G\) su \(X\).
+\end{esempio}
+
+\begin{esempio}[Il funtore potenza]
+Lo scopo di questo esempio è analogo a quello dell'esempio~\ref{esempio:DimIsFunctor}, ma questa volta con l'insieme delle parti di un insieme. Il funtore
+\[\wp : \op\Set \to \Set\]
+è così descritto. Per quanto riguarda gli oggetti, manda un insieme \(X\) nell'insieme delle parti \(\wp(X)\). Per quanto riguarda le frecce, spedisce una funzione \(f : A \to B\) nella funzione \(\wp(f) : \wp(B) \to \wp(A)\) tale che \((\wp(f))(C) = \inv f(C)\). Manca la verifica degli assiomi di funtorialità di \(\wp\), ma lo lasciamo come esercizio (\perlettore), ricordando che si tratta di un funtore controvariante.
+\end{esempio}
+
+\begin{esempio}[Le funzioni monotone sono funtori]
+Questa volta ci appigliamo all'esempio~\ref{esempio:PreOrdsAreCats}. Dati due insiemi preordinati \((A, \leqslant_A\) e \((B, \leqslant_B)\), una funzione \(f : A \to B\) è detta {\em monotona} quando per ogni \(x, y \in A\) si ha che se \(x \leqslant_A y\) allora \(f(x) \leqslant_B f(y)\). In parole povere, una funzione monotona preserva l'ordinamento. In termini puramente insiemistici questo significa: se la coppia \((x, y)\) appartiene a \(\leqslant_A\), allora \((f(x), f(y))\) è un elemento di \(\leqslant_B\). In termini categoriali questa frase si rende così: se \((x, y)\) è una freccia di \(A\), allora \((f(x), f(y))\) è una freccia di \(B\). Questo ci suggerisce in che modo possiamo pensare \(f : A \to B\) come un funtore: manda un oggetto \(x \in A\) in \(f(x) \in B\) e una freccia \((x, y)\) in \((f(x), f(y))\).% In formule, stiamo dicendo che
+%\[f((x, y)) \coloneq (f(x), f(y)).\]
+Passiamo alla verifica della funtorialità. Per ogni oggetto \(a\) di \(A\), l'identità \((a, a)\) viene mandata in tal senso in \((f(a), f(a))\), l'identità su \(f(a)\). Poi, prese le frecce componibili \((x, y)\) e \((y, z)\) si ha
+\begin{align*}
+&f((y, z)(x, y)) = f((x, z)) = (f(x), f(z)) = \\
+&= (f(y), f(z)) (f(x), f(y)) = f((y, z)) f((x, y))\,.
+\end{align*}
+\end{esempio}
+
+\begin{esercizio}
+Presi due insiemi preordinati \((A, \leqslant_A\) e \((B, \leqslant_B)\), una funzione \(f : A \to B\) è detta {\em antitona} se e solo se per ogni \(x, y \in A\) si ha se \(x \leqslant_A y\) allora \(f(y) \leqslant_B f(x)\). Interpretare le funzioni antitone come funtori.
+\end{esercizio}
+
+\begin{esempio}[Spazi vettoriali duali]
+Preso uno spazio vettoriale \(V\) su campo \(k\), lo {\em spazio vettoriale duale} di \(V\) è lo spazio vettoriale
+\[V^\ast \coloneq \set{\text{applicazioni lineari } V \to k}.\]
+C'è un funtore
+\[(\_)^\ast : \op{\Vect} \to \Vect\]
+così descritto: uno spazio vettoriale viene mandato nel corrispettivo spazio vettoriale duale; per ogni coppia di spazi vettoriali \(V\) e \(W\), una freccia \(f : V \to W\) di \(\op\Vect\) (ovvero una freccia \(W \to V\) di \(\Vect\)) viene mandata nella freccia \(f^\ast \coloneq \_\,f : V^\ast \to W^\ast\).
+\end{esempio}
+
+\begin{esempio}[La dimensione è un funtore]\label{esempio:DimIsFunctor}
+Questa volta gli attori sono le categorie \(\FDVect\) e \(\Mat\), fissato un campo \(k\) (quest'ultima categoria è stata vista con l'esempio~\ref{esempio:MatsFormsACat}). Il nostro scopo è di far vedere come funtore la dimensione di uno spazio vettoriale a dimensione finita. Un teorema fondamentale dell'Algebra Lineare (uno dei primi anche) è questo:
+%
+\begin{quotation}
+Siano \(V\) un \(k\)-spazio vettoriale con base \(\catB_1\) e dimensione \(m\) e \(W\) un \(k\)-spazio vettoriale con base \(\catB_2\) e dimensione \(n\).\footnote{Per il Lemma di Zorn ogni spazio vettoriale ha una base.} Per ogni applicazione lineare \(f : V \to W\) esiste una e una sola matrice \(A\) del tipo \(n \times m\) per cui commuta il diagramma
+\[\begin{tikzcd}
+V \ar["f",r] \ar["p_1",d,swap] & W \ar["p_2",d] \\
+k^m \ar["A\_",r,swap]          & k^n
+\end{tikzcd}\]
+dove \(p_1\) e \(p_2\) sono le mappe coordinate relative alle basi \(\catB_1\) e \(\catB_2\) rispettivamente.\footnote{Dato uno spazio vettoriale \(V\) su campo \(k\) con base \(\set{e_1, \dots, e_n}\), la {\em mappa coordinate} di \(V\) rispetto a tale base è la funzione \(p : V \to k^n\) che manda un vettore \(v = \sum_{i=1}^n \alpha_i e_i\) nella \(n\)-upla \(\nupla{\alpha_1 \\ \vdots \\ \alpha_n}\).} \(A\) è chiamata {\em matrice associata} a \(f\).
+\end{quotation}
+%
+Questo teorema ci suggerisce in che senso può aversi un funtore
+\[\dim : \FDVect \to \Mat.\]
+È bene prima osservare che bisogna scegliere in ciascuno degli spazi vettoriali una base: non viene sancita infatti l'unicità in assoluto della matrice associata, ma viene detto che la matrice associata dipende dalle basi scelte in partenza e in arrivo, e che, una volta fatta questa scelta, vale l'unicità della matrice associata.\newline
+Questo funtore manda un oggetto di \(\FDVect\) nella sua dimensione \(n\) e una applicazione lineare \(f : V \to W\) nella sua matrice associata \(\dim f : \dim V \to \dim W\), la quale è totalmente descritta dal teorema che abbiamo riportato all'inizio di questo esempio. Ci resta quindi da verificare effettivamente che \(\dim\) sia un funtore. Preso uno spazio vettoriale con una sua base, all'applicazione lineare identità è associata la matrice identità. Scelte delle basi per gli spazi vettoriali, alla composizione \(gf\) di applicazioni lineari viene associata il prodotto matriciale \(\dim g \dim f\). Questo fatto è puramente deducibile dal commutare del rettangolo più grande
+\[\begin{tikzcd}
+V_1 \ar["f",rr,swap] \ar["p_1",d,swap] \ar["gf",rrrr,bend left=15] & &
+V_2 \ar["g",rr,swap] \ar["p_2",d] & &
+V_3 \ar["p_3",d] \\
+k^m \ar["{\dim f\_}",rr] \ar["{(\dim g \dim f)\_}",rrrr,bend right=15,swap] & &
+k^n \ar["{\dim g\_}",rr] & &
+k^p
+\end{tikzcd}\]
+dove \(V_1\), \(V_2\) e \(V_3\) sono spazi vettoriali a dimensione finita con una base ciascuna, \(f\) e \(g\) sono applicazioni lineari, \(p_1\), \(p_2\) e \(p_3\) sono le rispettive mappe coordinate. Con queste verifiche possiamo dire di aver finito.
+\end{esempio}
+
+\begin{esercizio}
+Sicuramente è più ovvio un funtore \(\Mat \to \FDVect\): trovalo e descrivilo.
+\end{esercizio}

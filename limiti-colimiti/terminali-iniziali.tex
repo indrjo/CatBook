@@ -1,0 +1,95 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Oggetti iniziali e terminali}
+
+\begin{definizione}[Oggetti iniziali e terminali]
+Sia \(\catC\) una categoria. Un suo oggetto \(a\) è detto {\em terminale}\index{oggetto terminale} quando per ogni oggetto \(x\) di \(\catC\) esiste una e una sola freccia \(x \to a\) di \(\catC\), {\em iniziale}\index{oggetto iniziale} quando per ogni oggetto \(x\) di \(\catC\) esiste una e una sola freccia \(a \to x\) di \(\catC\).
+\end{definizione}
+
+Per costruzione, una categoria e la sua duale condividono gli stessi oggetti. Il seguente teorema consente di definire gli oggetti terminali (iniziali) di una categoria come oggetti iniziali (terminali) della duale.
+
+\begin{teorema}\label{teorema:IniTer}
+Un oggetto terminale (iniziale) di una categoria è oggetto iniziale (terminale) della duale. 
+\end{teorema}
+
+\begin{proof}
+Da definizione, \(a\) è oggetto terminale di \(\catC\) se e solo se per ogni {\rosso oggetto \(x\) di \(\catC\)} esiste una e un'unica {\blu freccia \(x \to a\) di \(\catC\)}. Questa proprietà universale si riscrive subito in termini duali: per ogni {\rosso oggetto \(x\) di \(\op\catC\)} esiste una e una sola {\blu freccia \(a \to x\) di \(\op\catC\)}. Ovvero \(a\) come oggetto di \(\op\catC\) è iniziale. Ragionando analogamente, si riesce a mostrare che un oggetto terminale in una categoria è iniziale nella duale.
+\end{proof}
+
+\begin{teorema}[Unicità a meno di isomorfismi]
+Due oggetti terminali sono isomorfi, due oggetti iniziali pure.
+\end{teorema}
+
+\begin{proof}
+Infatti se \(0\) e \(0'\) sono due oggetti iniziali, allora abbiamo due frecce \(f : 0 \to 0'\) e \(g : 0' \to 0\) che sono uniche. Abbiamo così le composizioni \(gf : 0 \to 0\) e \(fg : 0' \to 0'\); e, visto che \(0\) e \(0'\) sono iniziali, \(gf\) e \(fg\) sono le uniche frecce su \(0\) e \(0'\). Ora essendoci per forza le identità, queste due composizioni sono identità sui rispettivi oggetti. Quindi \(0 \cong 0'\).\newline
+Il fatto che i terminali siano unici a meno di isomorfismi si può provare con un ragionamento simile a quanto fatto adesso oppure si può usare il teorema~\ref{teorema:IniTer}, visto che oggetti isomorfi in una categoria sono isomorfi pure nella duale.
+\end{proof}
+
+\begin{esercizio}
+Se \(\catC\) è una categoria con oggetto terminale \(1 \in \obj\catC\), allora per ogni \(a \in \obj\catC\) le frecce \(1 \to a\) sono monomorfismi. Se \(\catC\) è una categoria con oggetto iniziale \(0 \in \obj\catC\), allora per ogni \(a \in \obj\catC\) le frecce \(a \to 0\) sono epimorfismi.
+\end{esercizio}
+
+\begin{esempio}[Oggetti iniziali e terminali di \(\Set\)]
+È forse un fatto poco noto, ma per un qualsiasi insieme \(X\) esiste una e una sola funzione \(\nil \to X\). Sì, ci sono funzioni con dominio vuoto, solo che nella pratica si richiedono dominio e codominio di funzioni non vuoti. Secondo la Teoria degli Insiemi, una funzione da un insieme \(A\) ad un insieme \(B\) è uno qualsiasi degli insiemi \(f \subseteq A \times B\) con questa proprietà: per ogni \(x \in A\) esiste uno e un solo \(y \in B\) tale che \((x, y) \in f\). Ecco che se \(A = \nil\), allora l'unico sottoinsieme di \(\nil \times B = \nil\) è proprio \(\nil\) e la precedente proprietà diventa una verità vuota. Questo significa che \(\nil\) è l'unica funzione \(\nil \to B\) e, quindi, in linguaggio categoriale \(\nil\) è oggetto iniziale di \(\Set\).\newline
+Sia ora \(1\) un qualsiasi singoletto: è immediato in questo caso che per ogni insieme \(X\) esiste una e una sola funzione \(X \to 1\) (precisamente la funzione in questione è quella che manda ogni \(x \in X\) nell'unico elemento di \(1\)). In linguaggio categoriale, i singoletti sono gli oggetti terminali di \(\Set\).
+\end{esempio}
+
+\begin{esercizio}
+Gli oggetti terminali di \(\Set\) sono tra loro isomorfi, ma non necessariamente uguali (nel senso della Teoria degli Insiemi). Invece, \(\nil\) è proprio l'unico oggetto iniziale di \(\Set\): dimostralo.
+\end{esercizio}
+
+\begin{esercizio}[Oggetti iniziali e terminali di \(\Cat\)]
+Se ci sono, in \(\Cat\) chi sono gli oggetti terminali e iniziali?
+\end{esercizio}
+
+\begin{costruzione}[Elementi di oggetti]
+Come nell'esempio~\ref{esempio:ElemAsFunc}, un elemento di un insieme \(X\) è una qualsiasi funzione \(1 \to X\); parallelamente, dalla definizione~\ref{definizione:CatElem}, un elemento di una categoria piccola \(\catC\) è un qualsiasi funtore \(\uno \to \catC\). Il fatto è che sia \(1\) che \(\uno\) sono terminali in \(\Set\) e in \(\Cat\) rispettivamente. Traendo ispirazione da questi semplici fenomeni, possiamo formulare una definizione generale: data un categoria \(\catC\) con elemento terminale \(1\), un {\em elemento}\index{elemento} di un oggetto \(x\) di \(\catC\) è una qualsiasi freccia \(1 \to x\) di \(\catC\).
+\end{costruzione}
+
+\begin{esercizio}[Induzione \(\lrarr\) ricorsione]
+La categoria \(\Dyn\) è così fatta:
+\begin{itemize}
+\item gli oggetti sono tutte e sole le triple \((X, a, s)\), dove \(X\) è un insieme non vuoto, con \(a \in X\) e \(s : X \to X\) una funzione di insiemi;
+%
+\item le frecce da \((X, a, s)\) e \((Y, b, t)\) sono tutte e sole le funzioni di insiemi \(f : X \to Y\) per cui commuta
+\[\begin{tikzcd}[row sep = tiny]
+& X \ar["s", r] \ar["f", dd] & X \ar["f", dd] \\
+1 \ar["a", ur] \ar["b", dr, swap] \\
+& Y \ar["t", r, swap]             & Y
+\end{tikzcd}\]
+ovvero \(f(a) = b\) e \(fs = tf\) (nota che gli elementi \(a\) e \(b\) sono visti come funzioni, vedi esempio~\ref{esempio:ElemAsFunc});
+%
+\item prese delle frecce
+\[(X, a, p) \functo{f} (Y, b, q) \functo{g} (Z, c, r)\]
+la loro composizione è semplicemente la composizione di funzioni di insiemi \(gf\). 
+\end{itemize}
+%
+Il Principio d'Induzione implica il teorema di ricorsione, il quale dice:
+\begin{quotation}
+per ogni insieme \(X\) non vuoto, con \(a \in X\) e \(f : X \to X\) esiste una e una sola funzione \(x : \setN \to X\) tale che \(x_0 = a\) e \(x_{n+1} = f(x_n)\) per ogni \(n \in \setN\).
+\end{quotation}
+Questo teorema in termini categoriali diventa molto conciso e denso allo stesso tempo:
+\begin{quotation}
+\((\setN, 0, \_+1)\) è un oggetto iniziale di \(\Dyn\).
+\end{quotation}
+Un buon esercizio è quello di dimostrare il teorema di ricorsione (questo è un fatto della Teoria degli Insiemi). Più in tema invece è la richiesta di dimostrare il principio di induzione assumendo che \((\setN, 0, \_+1)\) sia un oggetto iniziale di \(\Dyn\).
+\end{esercizio}
+
+\begin{esempio}[Iniziali e terminali in insiemi preordinati]
+Sia \((X, \leqslant)\) un insieme preordinato: vedendolo come una categoria, ci chiediamo cosa siano gli oggetti terminali e iniziali. Un oggetto iniziale di \((X, \leqslant)\) è precisamente un elemento \(m_1 \in X\) tale che
+\[m_1 \leqslant x \text{ per ogni } x \in X,\]
+mentre un oggetto terminale \(m_2 \in X\) è tale che
+\[x \leqslant m_2 \text{ per ogni } x \in X.\]
+Nella Teoria degli Insiemi gli oggetti iniziali sono detti {\em minimali}, mentre quelli terminali sono detti {\em massimali}.\newline
+In un insieme preordinato i minimali non è detto che siano unici, ma almeno sono isomorfi; lo stesso per i massimali. In un insieme ordinato, essendo un insieme preordinato scheletrico, l'isomorfismo è uguaglianza: in tal caso i minimali diventano {\em minimi} e i massimali {\em massimi}.
+\end{esempio}
+
+\begin{esempio}
+Le categorie discrete non hanno né oggetti terminali né iniziali. È molto facile rendersene conto: da un oggetto verso ad uno diverso non parte alcuna freccia.
+\end{esempio}
+
+\begin{esercizio}
+Cos'è una proposizione falsa? E una proposizione vera?
+\end{esercizio}

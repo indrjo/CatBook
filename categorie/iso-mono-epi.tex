@@ -1,0 +1,164 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Isomorfismi, monomorfismi ed epimorfismi}
+
+\begin{definizione}[Oggetti isomorfi]
+Sia \(\catC\) una categoria e \(x\) e \(y\) due suoi oggetti. Una sua freccia \(f : x \to y\) è detta {\em isomorfismo}\index{isomorfismo} quando esiste una freccia \(g : y \to x\) di \(\catC\) per la quale
+\[gf = \id_x \text{ e } fg = \id_y .\]
+Un oggetto \(x\) si dice {\em isomorfo} a \(y\), e scriviamo \(x \cong y\), qualora esista un isomorfismo da \(x\) a \(y\).
+\end{definizione}
+
+\begin{esempio}
+In \(\Set\) gli isomorfismi sono tutte e sole le funzioni biunivoche (per quanto ovvio possa sembrare questo fatto, non è così immediato da dimostrare). In \(\Grp\) gli isomorfismi sono precisamente gli isomorfismi di gruppo, così come in \(\Rng\) gli isomorfismi sono esattamente gli isomorfismi di anelli. In \(\Top\), come ci si potrebbe aspettare, gli isomorfismi sono tutti e soli gli omeomorfismi.
+\end{esempio}
+
+\begin{esempio}[Appartenenza come funzione]\label{esempio:ElemAsFunc}
+Per ogni insieme \(A\) si ha
+\[A \cong \Set(1, A) ,\]
+dove \(1\) è un qualsiasi singoletto (insieme con un solo elemento). Basta prendere la funzione \(\epsilon : A \to \Set(1, A)\), che manda un elemento \(x \in A\) nella funzione \(f \in \Set(1, A)\) che manda l'unico elemento di \(1\) in \(x\); si vede subito che questa è una biezione.\newline
+Per quanto inutile possa sembrare, l'isomorfismo di \(\Set\) appena citato {\em identifica} un elemento \(x \in A\) con una funzione \(1 \to A\) che assume \(x\) come unico valore. Con \q{identifica} vogliamo dire che, alla fin della fiera, che \q{sono la stessa cosa}: e cosa ci impedisce di dire che un elemento \(x\) di \(A\) è una funzione \(1 \to A\)?\newline
+Questa domanda apre una interessante via: dato un insieme \(A\), un suo {\em elemento}\index{elemento} è una qualsiasi funzione \(x : 1 \to A\). Diventano così sinonimi \q{\(x \in A\)} e \q{\(x : 1 \to A\)}. Inoltre, se abbiamo una funzione \(f : A \to B\) e un \(x \in A\), vengono identificati \(f(x)\) e \(f \circ x\):
+\[\underbrace{1 \functo{x} A \functo{f} B}_{f(x)} .\]
+\end{esempio}
+
+\begin{esercizio}
+Dimostra che l'inversa di una freccia se esiste è unica.
+\end{esercizio}
+
+Denoteremo l'inversa di una freccia \(f\) con \(\inv f\).
+
+\begin{esercizio}
+Dimostrare che in una qualsiasi categoria
+\begin{enumerate}
+\item \(\inv{(\inv f)} = f\) per ogni isomorfismo \(f\);
+\item per ogni coppia di isomorfismi \(f\) e \(g\) componibili si ha \(\inv{(gf)} = \inv f \inv g\).
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}\label{esercizio:CongIsIso}
+Prova che l'isomorfismo è una relazione di equivalenza.
+\end{esercizio}
+
+\begin{nota}
+La relazione di isomorfismo non poteva non essere introdotta: ci serve qualche nozione che veicoli il concetto di \q{essere la stessa cosa}. Se il lettore ha un po' di esperienza, sa che la relazione di isomorfismo è ben più importante della relazione di uguaglianza dato che non è interessante, e nemmeno proficuo, insistere a chiedersi se due cose sono \q{esattamente la stessa cosa}. Immagina anche solo la Teoria degli Insiemi senza la relazione di equipotenza: non avresti a disposizione in tal caso molti risultati fondamentali! Figurarsi poi dell'Algebra, della Topologia, \dots{}\newline
+La relazione di isomorfismo, col senno di poi, è la scelta giusta per il concetto di \q{essere la stessa cosa}. Comunque sia, continuerà ad esistere ancora il predicato di uguaglianza per gli oggetti.
+\end{nota}
+
+\begin{definizione}\label{definizione:SkCat}
+Una categoria \(\catC\) è detta {\em scheletrica}\index{categoria scheletrica} quando per ogni coppia \(x\) e \(y\) di suoi oggetti si ha che se \(x \cong y\) allora \(x = y\).
+\end{definizione}
+
+\begin{nota}
+È ovvio che due oggetti uguali sono isomorfi, in quanto l'identità è un isomorfismo. Per questa ragione è stata data la definizione~\ref{definizione:SkCat} con un'implicazione in un preciso verso.
+\end{nota}
+
+\begin{esempio}[Gli insiemi ordinati sono categorie scheletriche]
+Un {\em insieme ordinato} è un inseme preordinato con questa proprietà: se \(x \leqslant y\) e \(y \leqslant x\), allora \(x = y\).
+\end{esempio}
+
+\begin{costruzione}[Scheletri di una categoria]
+Uno {\em scheletro} di una categoria \(\catC\) è costruita come segue.
+\begin{itemize}
+\item La collezione degli oggetti di \(\catC\) è partizionata dalla relazione di isomorfismo (vedi esercizio~\ref{esercizio:CongIsIso}), e per l'assioma della scelta esiste una collezione che interseca ciascuna delle classi di equivalenza in uno e un solo elemento. Una qualsiasi di queste collezioni è la nostra candidata a collezione di oggetti dello scheletro: chiamiamola \(S\).
+\item Per ogni \(x, y \in S\) stabiliamo che \(\catC(x, y)\) è l'insieme delle frecce da \(x\) a \(y\) dello scheletro.
+\item Due frecce dello scheletro si compongono come in \(\catC\).%Le composizioni sono quelle di \(\catC\) ristrette agli elementi di \(S\).
+\end{itemize}
+È evidente che ogni scheletro di \(\catC\) è una sua sottocategoria piena.\newline
+Per come abbiamo definito lo scheletro, la costruzione non è univoca: ci possono essere più scheletri in quanto tutto dipende dalla collezione designata ad essere la collezione dei suoi oggetti.
+\end{costruzione}
+
+\begin{esercizio}
+Trova uno scheletro di \(\FDVect\).
+\end{esercizio}
+
+\begin{esercizio}
+\(\FinSet\) è la categoria degli insiemi finiti, delle funzioni tra questi ultimi e delle loro composizioni: trovale uno scheletro.
+\end{esercizio}
+
+Come nella categoria degli insiemi e delle funzioni abbiamo funzioni iniettive e suriettive, vogliamo avere qualcosa di simile con un sapore un po' più generale.
+
+\begin{esempio}[Definizioni equivalenti di iniettività e suriettività]
+Lavoriamo nel più noto ambiente \(\Set\). Classicamente, si danno le seguenti definizioni:
+\begin{itemize}
+\item una funzione \(f : X \to Y\) è iniettiva quando per ogni \(a, b \in X\) si ha che se \(f(a) = f(b)\) allora \(a = b\)
+\item una funzione \(f : X \to Y\) è suriettiva qualora per ogni \(y \in Y\) esiste almeno un \(x \in X\) per cui \(f(x) = y\).
+\end{itemize}
+Quello che vogliamo fare è vedere se ci sono forme equivalenti che si possono prestare ad un generalizzazione. Si può dimostrare, e non è difficile farlo, che
+%
+\begin{quotation}
+una funzione \(f : X \to Y\) è iniettiva se e solo se per ogni coppia di funzioni \(g\) e \(h\) con stesso dominio e codominio \(X\)  si ha
+\[fg = fh \tto g = h .\]
+\end{quotation}
+%
+Lo facciamo subito. Sia \(f :  X \to Y\) iniettiva e siano \(g\) e \(h\) due qualsiasi funzioni con codominio \(X\), tali che per ogni \(x \in X\) si abbia \(f(g(x)) = f(h(x))\). Allora \(g(x) = h(x)\) per ogni \(x\) del dominio di \(g\) e \(h\) (che abbiamo supposto essere lo stesso), e pertanto \(g = h\).\newline
+Viceversa, assumiamo che \(f\) sia tale che per ogni coppia di funzioni \(g\) e \(h\) con codominio \(X\) si ha che se
+\(fg = fh\), allora \(g = h\). Sia anche \(f(x) = f(y)\); come abbiamo visto, \(f(x)\) è la composizione \(f x\), e lo stesso per \(f(y)\). Quindi se \(fx = fy\), allora \(x=y\).\newline
+Possiamo fare qualcosa dello stesso sapore:
+%
+\begin{quotation}
+una funzione \(f : X \to Y\) è suriettiva se e solo se per ogni coppia di funzioni \(g\) e \(h\) con dominio \(Y\) si ha
+\[gf = hf \tto g = h .\] 
+\end{quotation}
+%
+La prova di ciò è lasciata come esercizio per il lettore (\perlettore).
+\end{esempio}
+
+\begin{nota}
+Ora, è vero che abbiamo dato in questo modo delle definizioni logicamente equivalenti, però, per come sono scritte, hanno qualcosa di distintivo. Nelle definizioni \q{classiche} si menziona il comportamento sugli elementi del dominio, mentre nelle forme equivalenti le funzioni non vivono isolate dalle altre, anzi le si vuole caratterizzare per come si pongono tra queste. Queste ultime sono adatte ad essere esportate in una trattazione più generale, quale la Teoria delle Categorie è, perché gli oggetti categoriali non sono necessariamente insiemi (con roba addosso eventualmente).
+\end{nota}
+
+Fatta questa parentesi, diamo le seguenti definizioni.
+
+\begin{definizione}[Monomorfismi ed epimorfismi]\label{definizione:MonoAndEpi}
+In una categoria \(\catC\)
+%
+\begin{itemize}
+\item una sua freccia \(f : x \to y\) è un {\em monomorfismo}\index{monomorfismo} quando per ogni coppia di frecce \(g\) e \(h\) di \(\catC\) con lo stesso dominio e con codominio \(x\) si ha che se \(fg = fh\), allora \(g = h\);
+\item una sua freccia \(f : x \to y\) è un {\em epimorfismo}\index{epimorfismo} quando per ogni coppia di frecce \(f\) e \(g\) di \(\catC\) con dominio \(y\) e con lo stesso codominio si ha che se \(gf = hf\), allora \(g = h\).
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}
+Gli isomorfismi sono monomorfismi ed epimorfismi.
+\end{teorema}
+
+\begin{proof}
+Siano \(f\) un isomorfismo e siano \(g\) e \(h\) due frecce tali che \(fg = fh\). Essendo \(f\) isomorfismo, allora è definita \(\inv f\) e quindi
+\[g = \inv f(fg) = \inv f(fh) = h .\]
+Abbiamo provato che \(f\) è un monomorfismo. Assumendo \(gf = hf\), abbiamo invece
+\[g = (gf) \inv f = (hf) \inv f = h ,\]
+e \(f\) è un epimorfismo.
+\end{proof}
+
+Il viceversa, purtroppo, non vale in generale.
+
+\begin{esempio}
+Abbiamo visto nell'esempio \ref{esempio:MonoidsAreCats} che un monoide è una categoria. L'insieme dei numeri naturali \(\setN\) è un monoide se preso assieme all'addizione \(+\). Quindi è una categoria in cui la composizione è \(+\)
+\[\begin{tikzcd}
+\bullet \ar["m",r] & \bullet \\
+\bullet \ar["n",u] \ar["{m+n}",ur,swap]
+\end{tikzcd}\]
+Ogni numero naturale \(x\) è sia monomorfismo che epimorfismo. Infatti valgono
+\begin{align*}
+& x + p = x + q \tto p = q \quad\text{per ogni } p, q \in \setN \\
+& u + x = v + x \tto s = t \quad\text{per ogni } u, v \in \setN \,.
+\end{align*}
+Ma se \(x \ne 0\), allora \(x\) non è un isomorfismo. Infatti, essendo \(0\) l'identità, per ogni \(x \ne 0\) e non c'è alcun \(y\) per cui \(x + y = 0\).
+\end{esempio}
+
+\begin{esercizio}
+Richiama se serve quanto detto nell'esempio \ref{esempio:PreOrdsAreCats}. In un insieme preordinato chi sono i monomorfismi e chi gli epimorfismi? È vero che i monomorfismi e gli epimorfismi sono isomorfismi?
+\end{esercizio}
+
+\begin{esercizio}
+Siano
+\[a \functo{f} b \functo{g} c\]
+due frecce di una stessa categoria. Se \(f\) e \(g\) sono monomorfismi, pure \(gf\) lo è. Se \(gf\) è un monomorfismo, allora anche \(f\) lo è (in generale, niente è dato sapere su \(g\)).
+\end{esercizio}
+
+\begin{costruzione}[La categoria \(\mathbf{Monic}(c)\) e sottoggetti]
+Sia \(\catC\) una categoria e \(c\) un suo oggetto: definiamo \(\mathbf{Monic}(c)\) come la sottocategoria piena di \(\catC/c\) avente come oggetti tutti e soli i monomorfismi di \(\catC/c\). {\color{red} [Proseguire...]}
+\end{costruzione}
+

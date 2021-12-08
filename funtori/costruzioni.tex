@@ -1,0 +1,121 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Costruzioni coi funtori}
+
+%Questa sezione è destinata ad alcune costruzioni e funtori notevoli che hanno un vasto uso.
+%
+%\begin{costruzione}[Funtore \(\hom\)\index{funtore \(\hom\)}]
+%Presa un categoria \(\catC\) localmente piccola, il funtore
+%\[\hom : \op\catC \times \catC \to \Set\]
+%è così fatto:
+%\begin{itemize}
+%\item manda una coppia \((x, y)\) di oggetti di \(\catC\) nell'insieme \(\catA(x, y)\)
+%\item manda una coppia di frecce \(f : a \to b\) e \(g : c \to d\) (ovvero una freccia \((a, c) \to (b, d)\)) nella freccia
+%\[\catC(a, c) \to \catC(b, d), \quad q \to gqf.\]
+%\end{itemize}
+%Questo funtore può essere anche indicato con \(\catC(\_, \_)\).\newline
+%Questo funtore è importante per una serie di motivi e non è il memento di parlarne adesso. Quello che si può dire è che \q{fissando un oggetto} si originano due funtori, uno covariante e l'altro controvariante:
+%\begin{align}
+%& \catC(a, \_) : \catC \to \Set \label{eqn:hom} \\
+%& \catC(\_, b) : \op\catC \to \Set\,.\label{eqn:cohom}
+%\end{align}
+%Precisamente, il primo manda un oggetto \(x\) in \(\catC(a, x)\) e una freccia \(g : x \to y\) nella freccia
+%\[g\_ : \catC(a, x) \to \catC(a, y),\, q \to gq.\]
+%Analogamente, il funtore~\eqref{eqn:cohom} manda un oggetto \(x\) in \(\catC(x, b)\) e una freccia \(f : x \gets y\) in una freccia
+%\[\_\,f : \catC(x, b) \to \catC(y, b),\, q \to qf.\]
+%\end{costruzione}
+%
+%\begin{evasione}
+%Il funtore \(\hom\) è un tipo particolare di profuntore. Tecnicamente, un {\em profuntore}\index{profuntore} da \(\catA \nto \catB\) è un funtore
+%\[\op\catB \times \catA \to \Set.\]
+%Nel nostro caso \(\hom : \op\catC \times \catC \to \Set\) è un profuntore da \(\catC\) a \(\catC\). Niente, questa è un'osservazione della quale puoi fare a meno.
+%\end{evasione}
+
+\begin{costruzione}[Categoria virgola]
+Date delle categorie \(\catA\), \(\catB\) e \(\catC\) e due funtori
+%
+\[\catA \functo{S} \catC \lfuncto{T} \catB\]
+%
+la {\em categoria virgola}\index{categoria virgola} indicata con \((S / T)\) è così fatta\footnote{Questa categoria fece il suo debutto in qualche articolo del matematico F. W. Lawvere nel 1963 con una notazione che contemplava una virgola: nel nostro caso, ad esempio, avrebbe scritto \((S, T)\). Questa venne abbandonata anche presto perché ritenuta fonte di ambiguità. Ad oggi resiste soltanto il nome a ricordo di questo segno grafico, e una notazione alternativa è \((S \downarrow T)\).}:
+\begin{itemize}
+\item gli oggetti sono tutte e sole le terne \((x, y, f)\), dove \(x\) è oggetto di \(\catA\) e \(y\) oggetto di \(\catB\) e \(f : S(x) \to T(y)\) è una freccia di \(\catC\);
+\item le frecce da \((x, y, f)\) a \((x', y', f')\) sono tutte e sole le coppie \((g, g')\) con \(g : x \to x'\) e \(g' : y \to y'\) frecce di \(\catA\) e \(\catB\) rispettivamente e tali che
+\[\begin{tikzcd}
+S(x) \ar["S(g)",r] \ar["f",d,swap] & S(x') \ar["f'",d] \\
+T(y) \ar["T(g')",r,swap]           & T(y')
+\end{tikzcd}\]
+commuta;
+\item la composizione è così definita
+\[\underbrace{(f', g')(f, g)}_{\text{composizione in }(S \downarrow T)} \coloneq (\underbrace{f'f}_{\text{composizione in }\catA}, \underbrace{g'g}_{\text{composizione in }\catB}) ,\]
+qualora abbiano senso le composizioni al secondo membro, ovviamente.
+\end{itemize}
+La composizione di frecce della categoria virgola è suggerita dal commutare del rettangolo esterno
+\[\begin{tikzcd}
+S(x) \ar["S(f)",r,swap] \ar["S(f'f)",rr, bend left=15] \ar["h",d,swap] &
+S(x') \ar["S(f')",r,swap] \ar["h'",d] &
+S(x'') \ar["h''",d] \\
+T(y) \ar["T(g)",r] \ar["S(g'g)",rr,bend right=15,swap] &
+T(y') \ar["T(g')",r] &
+T(y'')
+\end{tikzcd}\]
+una volta presi dei suoi oggetti e delle sue frecce
+\[(x, y, h) \functo{(f, g)} (x', y', h') \functo{(f',g')} (x'', y'', h'')\]
+Lasciamo come esercizio al lettore la verifica degli assiomi di categoria per la costruzione appena presentata (\perlettore).
+\end{costruzione}
+
+La cosa interessante è che le categorie taglio e frecce possono essere pensati come casi speciali di categoria virgola.
+
+\begin{esempio}[Categoria taglio come categoria virgola]
+Consideriamo una categoria \(\catC\) e la coppia di funtori
+\[\catC \functo{\id_\catC} \catC \lfuncto{c} \uno\]
+dove \(c\) è un elemento di \(\catC\) (nel senso precisato nella definizione~\ref{definizione:CatElem}). Ci chiediamo com'è fatta la categoria \((\id_\catC/c)\) e come possa essere pensata come la categoria taglio \(\catC/c\).\newline
+I suoi oggetti sono precisamente le triple
+\[(x, \ast, f : \id_\catC(x) \to c(\ast)) = (a, \ast, f : x \to c)\,\]
+dove \(x \in \obj\catC\) e con \(\ast\) abbiamo scelto di indicare l'unico oggetto di \(\uno\). Il fatto è che \(\ast\) è un oggetto fissato del quale non ci interessa il nome e che la terza componente contiene tutte le informazioni necessarie della tripla: quindi questa può stare da sola senza perdita di dati. In altri termini, la tripla è essenzialmente la freccia \(f : x \to c\). Ed abbiamo ritrovato gli oggetti di \(\catC/c\).\newline
+Le frecce di \((\id_\catC/c)\) da \((x, \ast, f : x \to x)\) a \((y, \ast, g : y \to c)\) sono le coppie \((h, \id_\ast)\), con \(h\) una freccia \(x \to y\) di \(\catC\), per cui commuta
+\[\begin{tikzcd}
+\id_\catC(x) \ar["{\id_\catC(h)}", r] \ar["f", d, swap] &
+\id_\catC(y) \ar["g", d] \\
+c(\ast) \ar["{c(\id_\ast)}", r, swap] & c(\ast)
+\end{tikzcd}\]
+il quale si riduce al più semplice
+\[\begin{tikzcd}[column sep = tiny]
+x \ar["h", rr] \ar["f", dr, swap] &   & y \ar["g", dl] \\
+                                  & c &
+\end{tikzcd}.\]
+L'informazione significativa in \q{\((h, \id_\ast)\)} è \(h\), e quindi praticamente questa coppia di frecce si riduce ad \(h\).\newline
+Lasciamo al lettore come esercizio il semplice esame delle composizioni (\perlettore{}).
+\end{esempio}
+
+\begin{esercizio}[Categoria freccia come categoria virgola]
+Far veder come \(\vec\catC\), con \(\catC\) categoria, possa essere pensata come la categoria \((\id_\catC/\id_\catC)\).
+\end{esercizio}
+
+\begin{costruzione}[Un diagramma \index{diagramma} è un funtore]\label{costruzione:DiagsAreFunctors}
+{\color{red} [Rimuovere questa parte da qui?]}
+Adesso possiamo formalizzare il concetto di diagramma, e per farlo iniziamo con un esempio per spiegarne l'idea di fondo. Prendiamo il seguente triangolo (tre nodi e tre archi)
+\[\begin{tikzcd}
+a \ar["f",r] \ar["g",dr,swap] & b \ar["h",d] \\
+                              & c
+\end{tikzcd}\]
+Questa rappresentazione può essere pensata come questo disegno muto
+\[\begin{tikzcd}
+	\colbullet[blue] \ar[r] \ar[dr] & \colbullet[green] \ar[d] \\
+	                                & \colbullet[red]
+\end{tikzcd}\]
+al quale vengono messe delle etichette. Questo disegno, per quanto inespressivo, può essere pensato ad una categoria (basta imporgli di rispettare gli assiomi di categoria), ed è questo che ci interessa. Ecco che si può pensare ad un diagramma come un opportuno funtore da una categoria indice (in questa sede la categoria \q{muta}, ad una categoria desiderata) ad incarnare l'atto di mettere etichette a nodi e archi:
+\[\left(\begin{tikzcd}[sep=small]
+\colbullet[blue] \ar[r] \ar[dr] & \colbullet[green] \ar[d] \\
+	                            & \colbullet[red]
+\end{tikzcd}\right) \longrightarrow
+\left(\begin{tikzcd}[sep=small]
+a \ar["f",r] \ar["g",dr,swap] & b \ar["h",d] \\
+	                          & c
+\end{tikzcd}\right).\]
+Seguendo questo esempio, passiamo quindi a dare la definizione di diagramma commutativo.\newline
+Un {\em diagramma} in una categoria \(\catA\) è un funtore \(D : \bfI \to \catA\) per qualche categoria \(\bfI\). In tal senso \(D\) è detto \q{avere la forma \(\bfI\)} o \q{di forma \(\bfI\)}. Queste locuzioni rispecchiano in pieno il ruolo di \(\bfI\): questa consente infatti di ritagliare una determinata situazione all'interno di una situazione più complessa (un intera categoria). E se fatti in maniera opportuna questi ritagli, ci consentiranno di fare cose interessanti. Avremo modo di parlarne diffusamente tra qualche capitolo.
+\end{costruzione}
+
+

@@ -1,0 +1,34 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Categoria delle categorie\dots{}}
+
+Abbiamo detto all'inizio che con i funtori si vuole avere quello che si ha tra gli oggetti di una qualsiasi categoria: delle frecce tra categorie. In effetti c'è un modo sensato di comporre due funtori e di definire un funtore identità. Precisamente, se \(F : \catA \to \catB\) e \(G : \catB \to \catC\) sono funtori, la composizione \(GF : \catA \to \catC\) è così fatta:
+\begin{itemize}
+\item manda un oggetto \(a\) di \(\catA\) nell'oggetto \(G(F(a))\) di \(\catC\)
+\item manda una freccia \(f : x \to y\) di \(\catA\) nella \(G(F(f)) : G(F(x)) \to G(F(y))\) di \(\catC\).
+\end{itemize}
+
+È immediato verificare che questa composizione di funtori è associativa, e il funtore identità \(\id_\catA : \catA \to \catA\) su una categoria \(\catA\) fa quello che ti aspetteresti: manda un oggetto in sé e una freccia in sé.
+
+Lo sbocco naturale di questo discorso sembra quindi la definizione di una \q{categoria di categorie e funtori}. Il fatto è che si rischia di incorrere in cavilli fondazionali, e come si può immaginare, non a torto, c'entrano le collezioni della definizione~\ref{definizione:DefCat}.
+
+Avvisiamo per tale ragione che in un primo momento questa parte si può saltare, proseguendo con la prossima sezione. Tuttavia la trattazione non vuole essere troppo approfondita e un lettore in cerca di spunti può leggersela tranquillamente.
+
+Diamo delle definizioni e vediamo che ruolo hanno in questo discorso.
+
+\begin{definizione}[Categorie piccole e grandi]
+Una categoria è detta {\em piccola}\index{categoria piccola} (rispettivamente {\em grande}\index{categoria grande}) qualora la collezione delle sue frecce è un insieme (rispettivamente classe propria). Diciamo anche che una categoria \(\catC\) è {\em localmente piccola} quando per ogni coppia di suoi oggetti \(x\) e \(y\) la collezione \(\catC(x, y)\) è un insieme. 
+\end{definizione}
+
+Chi sa un pochino di Teoria degli Insiemi secondo NBG, capisce la necessità di questa doppia ontologia. Non tutte le classi sono sullo stesso piano: un insieme è una classe che è elemento di una altra classe, una classe propria non può esserlo di un altra classe. È facile osservare, e gli assiomi di NBG lo consentono, che se la collezione delle frecce è un insieme, pure la collezione degli oggetti lo è. È facile anche notare che se una categoria è piccola, è anche localmente piccola.
+
+Quindi, cosa potrebbe essere esattamente una categoria di categorie? Se ci proponiamo di costruire la Teoria delle Categorie sopra la Teoria degli Insiemi secondo NBG, una categoria delle categorie dovrebbe avere una classe propria come collezione dei suoi oggetti. L'inconveniente sarebbe quello di avere (d'altra parte perché non averla?) una categoria grande tra questi oggetti, vale a dire una classe propria elemento di una classe propria: e qui tutto fallisce, in quanto NBG non supporta questo fenomeno.
+
+\begin{esempio}
+\(\Set\) non è una categoria piccola.
+\end{esempio}
+
+Cosa fare allora? Per ragioni pratiche, la strada la più percorribile è certamente quella di limitarsi alla categoria delle categorie piccole, quella che si indica con \(\Cat\). Non si perde di potenza certo, visto che la Matematica, tranne poche eccezioni, è fatta con insiemi. Ci sono altre impostazioni poi: insomma dipende da cosa uno vuole fare con la Teoria delle Categorie.
+

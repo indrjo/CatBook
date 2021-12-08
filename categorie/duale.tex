@@ -1,0 +1,53 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Il principio di dualità}
+
+{\color{red} [Perché non introdurre la costruzione della categoria duale qui, piuttosto che anticiparla? Così poi per parlare di dualità.]}
+
+Partiamo con un esempio per dare una prima idea di un principio che incarna un modo di fare.
+
+\begin{esempio}[Monomorfismi ed epimorfismi sono duali]
+Come esperimento, consideriamo un monomorfismo \(f : x \to y\) di una generica categoria \(\catC\). Operiamo una traduzione nel senso dello schema che segue:
+%
+\begin{center}
+%\begin{table}\centering
+\begin{tabular}{ccc}
+\toprule
+\(f\) monomorfismo di \(\catC\) & & \\
+\midrule
+per ogni & & per ogni \\
+oggetto \(a\) di \(\catC\) & \(\leftrightsquigarrow\) & oggetto \(a\) di \(\op\catC\) \\
+e per ogni & & e per ogni \\
+freccia \(g : a \to y\) di \(\catC\) & \(\leftrightsquigarrow\) & freccia \(g : y \to a\) di \(\op\catC\) \\
+esiste al più una &  & esiste al più una \\
+freccia \(h : a \to x\) di \(\catC\) & \(\leftrightsquigarrow\) & freccia \(h : x \to a\) di \(\op\catC\) \\
+tale che & & tale che \\
+\(g = fh\) & \(\leftrightsquigarrow\) & \(g = hf\) \\
+%\bottomrule
+\end{tabular}
+%\caption{ciao}
+%\end{table}
+\end{center}
+%
+L'ultima colonna ci dice proprio che \(f\), vista come freccia di \(\op\catC\) questa volta, è un epimorfismo di \(\op\catC\).
+\end{esempio}
+
+\begin{esercizio}
+Ragionando esattamente come abbiamo appena fatto, si può costatare facilmente come un epimorfismo in una categoria è un monomorfismo nella categoria duale.
+\end{esercizio}
+
+Il {\em principio di dualità} sancisce proprio questo: una proposizione in linguaggio categoriale vale per due, dove
+%
+\begin{itemize}
+\item con \q{proposizione in linguaggio categoriale} intendiamo una qualsiasi proposizione sensata, costruita secondo le regole della Logica di base (connettivi e quantificatori) e che parli di oggetti, frecce e composizioni.
+\item \q{vale per due} vuol dire che, siccome una categoria e la sua duale coesistono intimamente, una proposizione in linguaggio categoriale si può riformulare in termini duali; nella pratica si tratta di mantenre gli stessi oggetti, di invertire i ruoli di dominio e codominio (\q{cambia il verso delle frecce}) e di scambiare di posto le frecce nelle composizioni.
+\end{itemize}
+
+Questo significa che, ad esempio, possiamo limitarci a dare la definizione di monomorfismo (epimorfismo), per poi dire che
+\begin{quotation}
+una freccia \(f\) di una categoria è epimorfismo (monomorfismo) qualora \(f\) è un monomorfismo (epimorfismo) della categoria duale.
+\end{quotation}
+
+Questo principio riduce il nostro lavoro a metà oppure, equivalentemente, raddoppia i nostri risultati: un teorema in linguaggio categoriale rimane tale se lo si riscrive in termini duali e, anche qui, una dimostrazione fatta vale per due nel senso che ti aspetteresti.

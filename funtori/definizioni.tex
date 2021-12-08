@@ -1,0 +1,62 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Definizione}
+
+Fino ad ora abbiamo visto le categorie camminandoci dentro, mentre il passo successivo è quello di camminare fra le categorie. Per fare questo abbiamo bisogno anzitutto di una qualche nozione di frecce tra categorie: i funtori sono destinati a ricoprire questi ruoli. Il concetto di funtore deve essere pensato adeguatamente, vale a dire deve preservare della struttura. Abbiamo bisogno di qualcosa che accorpi oggetti, frecce e composizioni.
+
+\begin{definizione}[Funtori]\label{definizione:DefFunc}
+Siano \(\catC\) e \(\catD\) due categorie. Un {\em funtore}\index{funtore} \(F\) da \(\catC\) a \(\catD\) si indica con \(F : \catC \to \catD\) e consta delle seguenti funzioni indicate tutte con lo stesso nome \(F\):
+\begin{itemize}
+\item una funzione su oggetti \(F : \obj\catC \to \obj\catD\)
+\item funzioni su frecce, ovvero per ogni \(x,y \in \obj\catC\) di una funzione
+\[F : \catC(x, y) \to \catD(F(x), F(y)),\, f \to F(f)\] 
+\end{itemize}
+con i seguenti assiomi, che per noi sono gli {\em assiomi funtoriali} o {\em di funtorialità}\index{assiomi funtoriali}:
+\begin{enumerate}
+\item \(F(\id_x) = \id_{F(x)}\) per ogni oggetto \(x\) di \(\catC\)
+\item \(F(gf) = F(g)F(f)\) per ogni coppia di frecce \(f\) e \(g\) di \(\catC\) componibili.
+\end{enumerate}
+\end{definizione}
+
+I funtori della definizione appena data si dicono {\em covarianti}, anche se questo aggettivo è ormai desueto: quando si dice funtore, si sottointende questo aggettivo.
+
+\begin{definizione}[Funtori controvarianti]\label{definizione:ContrFunc}
+Un {\em funtore controvariante}\index{funtore controvariante} da una categoria \(\catC\) ad una categoria \(\catD\) è un funtore \(\op\catC \to \catD\).
+\end{definizione}
+
+\begin{nota}
+La definizione di funtore controvariante è molto ermetica, vediamo quindi cosa la rende particolare da meritarsi un nuovo aggettivo. Un qualche funtore \(F : \op\catC \to \catD\), da definizione, fa esattamente questo: manda ogni oggetto di \(\op\catC\) in uno e un solo oggetto di \(\catD\); manda una freccia \(f : a \to b\) di \(\op\catC\) in nella \(F(f) : F(a) \to F(b)\) in \(\catD\). Ma gli oggetti di \(\op\catC\) sono esattamente quelli di \(\catC\) e una freccia \(f : a \to b\) di \(\op\catC\) in \(\catC\) è una freccia \(b \to a\). Quindi in pratica il funtore \(F : \op\catC \to \catD\) manda oggetti di \(\catC\) in oggetti di \(\catD\), e frecce \(b \to a\) di \(\catC\) in frecce \(F(a) \to F(b)\) di \(\catD\).\newline
+Rimane ora da vedere osa succede agli assiomi di funtorialità. \(\catC\) e \(\op\catC\) condividono le stesse identità, quindi con le identità non fa nulla di diverso dalla definizione~\ref{definizione:DefFunc}. Prendiamo ora due frecce
+\[a \functo{f} b \functo{g} c\]
+di \(\op\catC\): da definizione di funtore, quindi abbiamo \(F(gf) = F(g) F(f)\). Ma le frecce prese in esame diventano
+\[c \functo{g} b \functo{f} a\]
+in \(\catC\), con la composizione \(gf\) di \(\op\catC\) è \(fg\) in \(\catC\). In definitiva succede quanto segue:
+\[F(\underbrace{fg}_{\substack{\text{\(f\) e \(g\) come frecce di \(\catC\) e} \\ \text{composte come tali in \(\catC\)}}}) =
+F(\underbrace{gf}_{\substack{\text{\(f\) e \(g\) come frecce di \(\op\catC\) e} \\ \text{composte come tali in \(\op\catC\)}}}) =
+F(g)F(f).\]
+\end{nota}
+
+\begin{esercizio}
+Cos'è un funtore \(\catC \to \op\catD\)?
+\end{esercizio}
+
+\begin{costruzione}[Categoria delle categorie?]
+C'è un modo sensato di comporre due funtori: se \(F : \catA \to \catB\) e \(G : \catB \to \catC\) sono funtori, la composizione \(GF : \catA \to \catC\) è così fatta:
+%
+\begin{itemize}
+\item manda un oggetto \(a\) di \(\catA\) nell'oggetto \(G(F(a))\) di \(\catC\)
+\item manda una freccia \(f : x \to y\) di \(\catA\) nella freccia
+\[G(F(f)) : G(F(x)) \to G(F(y))\]
+di \(\catC\).
+\end{itemize}
+%
+È immediato verificare che questa composizione di funtori è associativa, e il funtore identità \(\id_\catA : \catA \to \catA\) su una categoria \(\catA\) fa quello che ti aspetteresti. Ci sono insomma i presupposti per formare una \q{categoria delle categorie}, solo che si rischia di incappare in cavilli fondazionali! Immagina infatti che tra gli oggetti di questa categoria ce ne sia una (e perché dovrebbe non esserci?) i cui oggetti formano una classe propria: se si costruisce la Teoria delle Categorie sopra la Teoria degli Insiemi secondo NBG, questo non è possibile, vedi~\cite{berarducci:insiemi}. Ci sono tuttavia altre Teorie degli Insiemi che permettono la \q{categoria di tutte le categorie}, come fatto in~\cite{adamek-herrlich-strecker:cats}.
+\end{costruzione}
+
+Vogliamo avere qualcosa come nell'esempio~\ref{esempio:ElemAsFunc}.
+
+\begin{definizione}[Elemento di una categoria]\label{definizione:CatElem}
+I funtori \(\uno \to \catC\) si chiamano {\em elementi}\index{elemento} di \(\catC\). Adotteremo la seguente convenzione: se \(x\) è un oggetto di \(\catC\), allora \(x\) indica anche l'elemento di \(\catC\) che manda l'unico oggetto di \(\uno\) in \(x\) e l'unica identità di \(\uno\) in \(\id_x\). 
+\end{definizione}

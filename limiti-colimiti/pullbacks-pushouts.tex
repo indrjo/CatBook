@@ -1,0 +1,182 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Pullbacks e pushouts}
+
+\begin{definizione}[Pullbacks e pushouts]
+{\color{red} [Pullbacks (pushouts) di collezioni di frecce aventi codominio (dominio) comune?]}
+Sia \(\catC\) una categoria: un {\em pullback}\index{pullback} in \(\catC\) di una coppia di frecce di \(\catC\) con codominio comune
+\[\begin{tikzcd}
+                    & a \ar["s", d] \\
+b \ar["t", r, swap] & c
+\end{tikzcd}\]
+è un qualsiasi oggetto \(p\) di \(\catC\) con una coppia di frecce \(f : p \to a\) e \(g : p \to b\) di \(\catC\) tali da far commutare
+\begin{equation}\begin{tikzcd}
+p \ar["f", r] \ar["g", d, swap] & a \ar["s", d] \\
+b \ar["t", r, swap]             & c
+\end{tikzcd}\label{eqn:PullbackSquare}\end{equation}
+e con la seguente proprietà: per ogni oggetto \(q\) di \(\catC\) con frecce \(h : q \to a\) e \(k : q \to b\) di \(\catC\) per le quali commuta
+\[\begin{tikzcd}
+q \ar["h", r] \ar["k", d, swap] & a \ar["s", d] \\
+b \ar["t", r, swap]             & c
+\end{tikzcd}\]
+esiste una e una sola freccia \(l : q \to p\) di \(\catC\) tale che \(fl=h\) e \(gl=k\).
+%
+Il quadrato\footnote{Nulla di strettamente geometrico, quattro oggetti e quattro frecce}~\eqref{eqn:PullbackSquare} è detto \q{di pullback}\index{quadrato di pullback}. Dualmente, un {\em pushout}\index{pushout} in \(\catC\) di due frecce
+\[\begin{tikzcd}
+c \ar["s", r] \ar["t", d, swap] & a \\
+b                               &
+\end{tikzcd}\]
+di \(\catC\) è uno qualsiasi dei pullback in \(\op\catC\) della stessa coppia di frecce, questa volta viste come frecce di \(\op\catC\). Esiste anche un'ovvia nozione di \q{quadrato di pushout}\index{quadrato di pushout}.
+\end{definizione}
+
+%\begin{figure}
+%\input{figure/pullback.tex}
+%\caption{\(p\) con le frecce \(a \functo{f} p \lfuncto{g} b\) è un pullback della coppia di frecce \(a \xrightarrow{\ s \ } c \xleftarrow{\ t \ } b\).}
+%\end{figure}
+
+\begin{esercizio}
+Come abbiamo fatto nel paragrafo precedente, costruire una categoria apposita in cui un pullback (pushout) risulta un oggetto terminale (iniziale). In altre parole costruirai la {\em categoria dei coni} su
+\[\begin{tikzcd}
+         & a \ar[d] \\
+b \ar[r] & c  
+\end{tikzcd}.\]
+Fatto questo, puoi dire che un pullback (pushout) di una stessa coppia di frecce è unico a meno di isomorfismi. Anche in questo caso, osserva che un isomorfismo di coni è un isomorfismo di vertici.
+\end{esercizio}
+
+\begin{esempio}[Le preimmagini]
+Sia \(f : X \to Y\) una funzione di insiemi e \(C \subseteq Y\). Facciamo vedere che
+\[\begin{tikzcd}
+\inv f C \ar["{\bar f}", r] \ar["{i_X}", swap, d] & C \ar["{i_Y}", d] \\
+X \ar["f", swap, r]                               & Y 
+\end{tikzcd}\]
+è un quadrato di pullback di \(\Set\), dove \(\bar f (c) \coloneq f(c)\), \(i_X (a) \coloneq a\) e \(i_Y (b) \coloneq b\).\newline
+Anzitutto è facile vedere che il quadrato sopra commuta. Prendiamo un qualsiasi insieme \(A\) con due funzioni \(h : A \to X\) e \(k : A \to C\) per le quali commuta
+\[\begin{tikzcd}
+A \ar["k", r] \ar["h", swap, d] & C \ar["{i_Y}", d] \\
+X \ar["f", swap, r]             & Y 
+\end{tikzcd}:\]
+la funzione \(j : A \to \inv f C\) tale che \(j(z) \coloneq h(z)\) soddisfa \(h = i_X j\) e \(k = \bar f j\) (fai i conti!). Sia ora una funzione \(j' : A \to \inv f C\) tale che \(h = i_X j'\) e \(k = \bar f j'\): dalla prima di queste due abbiamo che \(h(x) = i_X j'(x) = j'(x)\) per ogni \(x \in A\) e quindi \(j' = j\).
+\end{esempio}
+
+\begin{esercizio}[La funzione caratteristica]
+Dati un insieme \(X\) e \(A \subseteq X\), la {\em funzione caratteristica} di \(A\) è
+\[\chi_A : X \to 2\,, \ \chi_A(x) \coloneq \begin{cases}1 & \text{se } x \in A \\ 0 & \text{altrimenti}\end{cases}\]
+nella quale \(2 \coloneq \set{0, 1}\). Abbiamo così il quadrato di \(\Set\)
+\begin{equation}\begin{tikzcd}
+A \ar["i", r] \ar["{\exists!}", d, swap] & X \ar["{\chi_A}", d] \\
+1 \ar["{\downvdash}", r, swap]           & 2
+\end{tikzcd},\label{eqn:CharFunc}\end{equation}
+dove \(\downvdash\) manda l'unico elemento del singoletto \(1\) in \(1 \in 2\). Provare che~\eqref{eqn:CharFunc} è un quadrato di pullback in \(\Set\).
+\end{esercizio}
+
+\begin{teorema}[Lemma dei pullbacks, o PBL\footnote{Sigla dell'espressione inglese \q{Pullback Lemma}.}]\label{teorema:PBL}
+Si consideri il seguente diagramma
+\[\begin{tikzcd}
+\bullet \ar["a", r] \ar["d", d, swap] & \bullet \ar["b", r] \ar["g", d] & \bullet \ar["c", d]\\
+\bullet \ar["e", r, swap] & \bullet \ar["f", r, swap] & \bullet
+\end{tikzcd}\]
+in cui il rettangolo esterno commuta e il quadrato a destra è di pullback. Il quadrato a sinistra è di pullback se e solo se il rettangolo esterno lo è.
+\end{teorema}
+
+\begin{proof}
+Assumiamo che il quadrato a sinistra sia di pullback e sia \(\ast\) un oggetto qualsiasi e \(h, k\) due frecce tali che il rettangolo in colore qui sotto
+%
+\[\begin{tikzcd}
+\ast \ar["h", bend left=10, drrr, blue] \ar["k", bend right=10, ddr, swap, blue] & & & \\
+& \bullet \ar["a", r, swap] \ar["d", d] & \bullet \ar["b", r, swap] \ar["g", d] & \bullet \ar["c", d, blue]\\
+& \bullet \ar["e", r, swap, blue] & \bullet \ar["f", r, swap, blue] & \bullet
+\end{tikzcd}\]
+%
+commuta, ovvero \(ch=f(ek)\). Da ipotesi, però \(\bullet \lfuncto{b} \bullet \functo{g} \bullet\) è un pullback di \(\bullet \functo{f} \bullet \lfuncto{c} \bullet\), e quindi esiste una e una sola freccia \(l\) tale che \(h = bl\) e \(gl = ek\):
+%
+\[\begin{tikzcd}
+\ast \ar["h", bend left=10, drrr, blue] \ar["k", bend right=10, ddr, swap, blue] \ar["l"{description}, bend left=8, drr] & & & \\
+& \bullet \ar["a", r, swap] \ar["d", d] & \bullet \ar["b", r, swap] \ar["g", d] & \bullet \ar["c", d, blue]\\
+& \bullet \ar["e", r, swap, blue] & \bullet \ar["f", r, swap, blue] & \bullet
+\end{tikzcd}\]
+%
+Abbiamo appena detto anche che quanto evidenziato qui sotto commuta
+%
+\[\begin{tikzcd}
+\ast \ar["h", bend left=10, drrr] \ar["k", bend right=10, ddr, swap, red] \ar["l"{description}, drr, bend left=8, red] & & & \\
+& \bullet \ar["a", r, swap] \ar["d", d] & \bullet \ar["b", r, swap] \ar["g", d, red] & \bullet \ar["c", d]\\
+& \bullet \ar["e", r, swap, red] & \bullet \ar["f", r, swap] & \bullet
+\end{tikzcd}\]
+%
+Di nuovo, essendo da ipotesi \(\bullet \lfuncto{a} \bullet \functo{d} \bullet\) un pullback di \(\bullet \functo{e} \bullet \lfuncto{g} \bullet\), esiste una e una sola freccia \(m\) tale che \(l = am\) e \(k = dm\):
+%
+\[\begin{tikzcd}
+\ast \ar["h", bend left=10, drrr] \ar["k", bend right=10, ddr, swap, red] \ar["l"{description}, drr, bend left=8, red] \ar["m"{description}, dr] & & & \\
+& \bullet \ar["a", r, swap] \ar["d", d] & \bullet \ar["b", r, swap] \ar["g", d, red] & \bullet \ar["c", d]\\
+& \bullet \ar["e", r, swap, red] & \bullet \ar["f", r, swap] & \bullet
+\end{tikzcd}\]
+%
+Ci sono tutte le carte in gioco per dire che \(h = bam\) e \(k = dm\), e che le nostre costruzioni ci portano necessariamente a \(m\): pertanto \(\bullet \lfuncto{d} \bullet \functo{ba} \bullet\) è un pullback di \(\bullet \functo{fe} \bullet \lfuncto{c} \bullet\).\newline
+%L'implicazione nel senso opposto è lasciata al lettore come esercizio (\perlettore).
+\end{proof}
+
+\begin{esercizio}
+Completare la dimostrazione del teorema~\ref{teorema:PBL} provado l'implicazione restante.
+\end{esercizio}
+
+\begin{esercizio}
+Provare: \(f : a \to b\) è un monomorfismo se e solo se
+\[\begin{tikzcd}
+a \ar["{\id_a}", r] \ar["{\id_a}", d, swap] & a \ar["f", d] \\
+a \ar["f", r, swap]                         & b
+\end{tikzcd}\]
+è un quadrato di pullback.
+\end{esercizio}
+
+\begin{esercizio}
+Considera il quadrato di pullback
+\[\begin{tikzcd}
+\bullet \ar["f", r] \ar[d] & \bullet \ar[d] \\
+\bullet \ar["g", r, swap]  & \bullet
+\end{tikzcd}:\]
+dimostra che se \(g\) è un monomorfismo, allora anche \(f\) lo è.
+\end{esercizio}
+
+\begin{teorema}
+Sia \(\catC\) una categoria, \(1 \in \obj\catC\) oggetto terminale, \(a, b , p \in \obj\catC\) e due frecce  di \(\catC\)
+\[\begin{tikzcd}
+a & p \ar["{\pi_1}", swap, l] \ar["{\pi_2}", r] & b
+\end{tikzcd}\]
+Sono equivalenti:
+\begin{enumerate}
+\item \(p\) assieme a \(\pi_1\) e \(\pi_2\) è un prodotto di \(a\) e \(b\) in \(\catC\).
+\item \(p\) con \(\pi_1\) e \(\pi_2\) è un pullback in \(\catC\) di \(a \to 1 \gets b\).
+%È di pullback il quadrato di \(\catC\)
+%\[\begin{tikzcd}
+%p \ar["{\pi_1}", r] \ar["{\pi_2}", swap, d] & a \ar["\exists!", d] \\
+%b \ar["\exists!", swap, r]              & 1
+%\end{tikzcd}.\]
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+Sia
+\[\begin{tikzcd}
+c \ar["f", r] \ar["g", swap, d] & a \ar["\exists!", d] \\
+b \ar["\exists!", swap, r]              & 1
+\end{tikzcd}\]
+un quadrato di \(\catC\). Questo commuta perché \(1\) è oggetto terminale; se poi \(p\) con le due frecce \(\pi_1\) e \(\pi_2\) è un prodotto in \(\catC\) di \(a\) e \(b\), allora abbiamo che esiste una e una sola freccia \(h : c \to p\) tale che \(\pi_1h = f\) e \(\pi_2h = g\).\newline
+Viceversa, per ogni \(c \in \obj\catC\) con due frecce
+\[a \lfuncto{f} c \functo{g} b\]
+di \(\catC\) si ha il quadrato commutativo
+\[\begin{tikzcd}
+c \ar["f", r] \ar["g", swap, d] & a \ar["\exists!", d] \\
+b \ar["\exists!", swap, r]              & 1
+\end{tikzcd}\]
+di \(\catC\): da definizione, esiste una e una sola freccia \(k : c \to p\) tale che \(\pi_1h = f\) e \(\pi_2h = g\). Trascurando le due frecce puntanti ad \(1\), abbiamo costruito all'interno di \(\catC\) un prodotto di \(a\) e \(b\).
+\end{proof}
+
+\begin{esercizio}
+Dualizza il teorema precedente.
+\end{esercizio}
+
+\begin{esercizio}
+Cosa sono i pullbacks e i pushouts dell'insieme ordinato \((\wp X, \subseteq)\), per \(X\) insieme?
+\end{esercizio}

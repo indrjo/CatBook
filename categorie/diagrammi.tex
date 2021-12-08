@@ -1,0 +1,89 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Diagrammi commutativi}
+
+%Con la Teoria delle Categorie viene anche il linguaggio dei {\em diagrammi commutativi}\index{diagramma commutativo}.
+
+La Teoria delle Categorie si porta con sé un elegante e trasparente linguaggio: quello dei digrammi commutativi. 
+
+Un {\em diagramma}, in parole povere, è un disegno fatto di posizioni e frecce: le posizioni sono i posti da riempire con i nomi di oggetti e le frecce stanno a rappresentare, appunto, le frecce tra oggetti. Visto che le identità ci sono sempre, non ci scomodiamo a disegnarle. Una freccia che non sia l'identità e che abbia dominio e codominio uguali si può disegnare come
+\[\begin{tikzcd}
+\phantom\bullet \ar[out=-30,in=30,loop,looseness=7,overlay]
+\end{tikzcd}\]
+oppure ripetere il nome dell'oggetto due volte e connettere le copie (non importa in questo caso il verso). La cosa importante è che frecce disegnate consecutivamente rappresentano composizioni di frecce. Due frecce consecutive
+\[\begin{tikzcd}[row sep=tiny]
+              & b \ar["g",dr] &   \\
+a \ar["f",ur] &               & c
+\end{tikzcd}\]
+si riducono naturalmente alla freccia composizione
+\[\begin{tikzcd}
+a \ar["gf",r] & c
+\end{tikzcd}.\]
+Si può generalizzare ovviamente:
+\[\begin{tikzcd}
+x_0 \ar["f_0",r] & x_1 \ar["f_1",r] & \dots{} \ar["f_{n-1}",r] & x_n
+\end{tikzcd}\]
+dà naturalmente la composizione
+\[\begin{tikzcd}[column sep=1.2cm]
+x_0 \ar["{f_{n-1}\cdots f_0}", r] & x_n
+\end{tikzcd}.\]
+
+\begin{nota}
+Uno di istinto si aspetterebbe, per esempio, di ottenere
+\[\begin{tikzcd}
+x \ar["fg",r] & z
+\end{tikzcd}\]
+da
+\[\begin{tikzcd}
+x \ar["f",r] & y \ar["g",r] & z
+\end{tikzcd}\]
+vale a dire comporre assecondando il verso delle frecce. E invece no. Questa non è una patologia del linguaggio appena introdotto, quanto una caratteristica dell'operazione di composizione: infatti (e questo lo insegnano anche alle Scuole Superiori) la scrittura \((g \circ f)(x)\) significa \(g(f(x))\), cioè in sostanza \q{si valuta prima \(f\) e poi \(g\)}, ritrovando così l'ordine di lettura invertito dei diagrammi. Questo modo di fare è talmente radicato nella pratica che tendenzialmente ci si conforma. Esiste comunque una notazione, comoda molte volte e scomoda molte altre, che vuole assecondare lo scorrimento nella lettura:
+\[f;g \coloneq g \circ f = g f .\]
+In queste pagine useremo la notazione classica, quella che abbiamo dato dall'inizio. Va da sé che uno, tranquillamente, potrebbe riscrivere queste pagine usando la notazione alternativa. L'importante è fare una scelta e mantenersi fedeli e coerenti a questa.
+\end{nota}
+
+Un diagramma è detto {\em commutativo} quando, comunque presi due oggetti nel diagramma, danno la stessa composizione percorsi di frecce consecutive che partono da uno qi questi due e terminano nell'altro.
+
+\begin{esempio}
+\[\begin{tikzcd}
+\bullet \ar["f_1",r] \ar["g_1",d,swap] & \bullet \ar["f_2",dr] & \\
+\bullet \ar["g_2",r,swap] & \bullet & \bullet \ar["f_3",l]
+\end{tikzcd}\]
+commuta quando \(f_3f_2f_1 = g_2g_1\).
+\end{esempio}
+
+\begin{esempio}
+\[\begin{tikzcd}
+& \bullet \ar["f_1",dl,swap] \ar["h",d] \ar["f_2",dr] & \\
+\bullet & \bullet \ar["g_1",l] \ar["g_2",r,swap] & \bullet
+\end{tikzcd}\]
+commuta quando \(f_1 = g_1h\) e \(f_2 = g_2h\).
+\end{esempio}
+
+\begin{nota}[Assiomi Categoriali, riscritti]
+Cosa significa che il diagramma
+\begin{equation}\begin{tikzcd}[row sep=tiny]
+               & b \ar["g", dr] &                & d \\
+a \ar["f", ur] &                & c \ar["h", ur] &
+\end{tikzcd}\label{diag:asso}\end{equation}
+commuta? Coomponendo le prime due e le ultime due frecce abbiamo
+\[\begin{tikzcd}[row sep=tiny]
+& b \ar["g"{description}, dr] \ar["hg", rr, red] & & d \\
+a \ar["f", ur, red] \ar["gf", rr, blue, swap] & & c \ar["h", ur, blue, swap] &
+\end{tikzcd}\]
+in cui abbiamo evidenziato con due colori diversi due percorsi di frecce consecutive. Il fatto che~\eqref{diag:asso} commuta significa precisamente che questi due percorsi danno la stessa composizione: ovvero \(h(gf)=(hg)f\).\newline
+Invece, cosa significa che
+\begin{equation}\begin{tikzcd}
+a \ar["f", r] & b
+\end{tikzcd}\label{diag:id}\end{equation}
+commuta? C'è l'identità su \(\id_a : a \to a\), e questo ci porta a considerare un ulteriore percorso di frecce consecutive da \(a\) a \(b\)
+\[\begin{tikzcd}[row sep=tiny]
+a \ar["f", dr] \ar["\id_a", dd, swap] &   \\
+                                      & b \\
+a \ar["f", ur, swap]                  & 
+\end{tikzcd}.\]
+Pertanto il fatto che commuta~\eqref{diag:id}, implica che \(f \id_a = f\); si riesce a vedere anche che segue \(\id_b f = f\). 
+\end{nota}
+

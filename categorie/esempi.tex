@@ -1,0 +1,133 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Esempi}
+
+%Questo paragrafo è destinato ad alcuni esempi di categorie, i primi che si possono fare.
+
+\begin{esempio}
+Diamo un po' di nomi.\newline
+\(\Set\) è la {\em categoria degli insiemi}: gli insiemi assumono il ruolo degli oggetti, le funzioni quello delle frecce e le composizioni di funzioni quello delle composizioni. Le nozioni basilari date sull'insiemistica sono sufficienti a verificare gli assiomi categoriali.\newline
+\(\Grp\) è la {\em categoria dei gruppi}: gli oggetti sono i gruppi, le frecce sono gli omomorfismi di gruppo, e le composizioni sono le composizioni di omomorfismi (che alla fine ha nulla in più rispetto alla composizione di funzioni).\newline
+\(\Vect\) è la {\em categoria degli spazi vettoriali} su un dato campo \(k\): gli oggetti sono gli spazi vettoriali su \(k\), le frecce sono le applicazioni lineari e le composizioni sono le composizioni di applicazioni lineari. Una sua sottocategoria piena notevole è \(\FDVect\): in questo caso gli oggetti sono gli spazi vettoriali a dimensione finita.\newline
+\(\Top\) è la {\em categoria degli spazi topologici}: gli oggetti sono gli spazi topologici, le frecce sono le funzioni continue e le composizioni sono composizioni di funzioni continue.%\newline
+%Per ciascuna di queste, nelle rispettive teorie si riescono a verificare facilmente gli assiomi categoriali.
+\end{esempio}
+
+%\begin{esercizio}[Riscaldamento]
+%Un piccolo esercizio di linguaggio è questo: far vedere come sono fatte, dando dettagli, le categorie qui sotto. Si tratta di assegnare i ruoli di oggetto, freccia e composizione, verificando anche se gli assiomi categoriali sono soddisfatti.
+%\begin{center}\begin{tabular}{l|l}
+%anelli e omomorfismi di anelli                         & \(\Rng\)  \\
+%spazi vettoriali su campo \(k\) e applicazioni lineari & \(\Vect\) \\
+%insiemi ordinati e funzioni monotone                   & \(\Poset\)
+%\end{tabular}\end{center}
+%(Ovviamente, nessuno vieta di andare a cercare altre categorie e presentarle.)
+%\end{esercizio}
+%
+%\begin{nota}
+%L'esempio e l'esercizio appena proposti sono emblematici. Il concetto di categoria in un certo senso è stato architettato tenendo in mente questi modelli: ovvero insiemi (con eventualmente della struttura addosso), funzioni (con eventualmente delle proprietà aggiuntive) e composizioni tra queste ultime. Questi però sono solo degli esempi, e fermarsi a questi sarebbe limitare la potenza della teoria. È bene quindi dirlo esplicitamente: un oggetto non è necessariamente un insieme (possibilmente con della struttura addosso); una freccia non è necessariamente una funzione (con qualche proprietà in più eventualmente); e una composizione di frecce non è necessariamente una composizione di funzioni.
+%\end{nota}
+
+\begin{esempio}\label{esempio:CatTerminal}
+Una categoria molto semplice è quella che consiste di un solo oggetto e di una sola freccia, che si può disegnare come
+\[\begin{tikzcd}
+\bullet \ar[out=-30,in=30,loop,looseness=7,overlay,"\id_\bullet",swap]
+\end{tikzcd}\]
+Osserviamo che come freccia c'è almeno l'identità e quindi quell'unica freccia deve essere l'identità. Per questo motivo il precedente disegno si riduce al più minimale
+\[\bullet\]
+Una siffatta categoria si indica con \(\uno\).
+\end{esempio}
+
+\begin{nota}
+Qua c'è già un cavillo: cos'è \(\bullet\)? Qualsiasi cosa tu voglia. E poi cosa può essere l'identità su, ad esempio, un fiore? Prendi qualcosa e (importante) imponigli di rispettare delle proprietà astratte. Potrebbe essere benissimo la coppia (\fiore{}, \fiore{}). Quando parleremo di funtori, capiremo in in che senso non importa cosa sia sia precisamente quell'oggetto e, conseguentemente, la sua identità.
+\end{nota}
+
+\begin{esempio}
+Si può generalizzare quanto visto nell'esempio precedente: una collezione qualsiasi di oggetti può essere pensata come una categoria in cui gli oggetti sono gli elementi della collezione e le uniche frecce sono le identità sui rispettivi elementi.
+\end{esempio}
+
+\begin{esempio}[Categoria vuota]
+Invero esiste una {\em categoria vuota}. Prendiamo l'insieme \(\nil\): in tal caso gli assiomi categoriali sono verificati perché sono verità vuote! L'insieme \(\nil\) quindi forma una categoria della stessa dignità di altre, e lo indica con \(\nil\), come il vuoto, oppure con \(\zero\).
+\end{esempio}
+
+Questo ci porta a parlare di categorie in cui gli oggetti, se ci sono, vivono isolati dagli altri.
+
+\begin{definizione}[Categorie discrete]
+Una categoria è {\em discreta}\index{categoria discreta} quando come frecce ha solamente le identità.
+\end{definizione}
+
+\begin{nota}
+Queste prime categorie possono sembrare davvero banali, ma sono importanti: primo, perché si impara a vedere categorie oltre a \q{casi comodi}; secondo, perché sono degli esercizi di astrazione e interiorizzazione della definizione di categoria; terzo, perché saranno utili in seguito. 
+\end{nota}
+
+\begin{esempio}[I monoidi sono categorie]\label{esempio:MonoidsAreCats}
+Richiamiamo dall'algebra il concetto di monoide. Un {\em monoide} consta di:
+\begin{itemize}
+\item un insieme \(M\)
+\item una funzione \(\ast : M \times M \to M\), \((x,y) \to xy\)
+\end{itemize}
+con i seguenti assiomi:
+\begin{enumerate}
+\item per ogni \(x,y,z \in M\) si ha \((xy)z = x(yz)\)
+\item esiste un \(u \in M\) tale che per ogni \(x \in M\) si ha \(xu = ux = x\)
+\end{enumerate}
+Consideriamo una categoria \(\catG\) avente un solo oggetto, che ci limitiamo a chiamare \(\bullet\): in tal caso (ed è immediato vederlo) la collezione \(\catG(\bullet,\bullet)\) è un monoide. Anzi, potremmo addirittura dire che \(\catG\) tutta è un monoide, perché quel \(\bullet\) non è altro che un appoggio per le frecce. Tuttavia, non c'è motivo di non pensare che \(M\) è proprio \(\catG\). Se adottiamo la concezione della Teoria delle Categorie come un puro linguaggio, possiamo dire che gli elementi di \(M\) sono frecce \(\bullet \to \bullet\) e \(\ast\) la composizione in senso categoriale; proseguendo per questa strada, l'associatività di \(\ast\) è l'associatività categoriale, l'identità del monoide è l'identità categoriale su \(\bullet\).
+\end{esempio}
+
+\begin{nota}
+Chiaramente \(\bullet\) è un \q{appiglio formale}, necessario se si vuole formulare in termini categoriali i concetti di monoide e gruppo.
+\end{nota}
+
+\begin{esercizio}
+Anche un gruppo è una categoria con una proprietà in più: quale?.
+\end{esercizio}
+
+\begin{esempio}[La categoria \(\Mat\)]\label{esempio:MatsFormsACat}
+In primo luogo consideriamo l'insieme dei numeri interi positivi. Consideriamo poi che, fissato un campo \(k\), per ogni coppia di interi positivi \(m\) e \(n\) abbiamo l'insieme
+\[\Mat(m,n) := \set{\text{matrici \(n \times m\) su campo \(k\)}} .\]
+Chi conosce un po' di Algebra Lineare sa che si possono moltiplicare\footnote{Rimandiamo il lettore ovviamente ad un testo di Algebra Lineare se non si ricorda o non sa ancora queste cose.} (nell'ordine) una matrice \(m \times n\) ed una matrice \(n \times r\) per ottenere una matrice \(m \times r\). Questo prodotto altro non è che una funzione
+\[\Mat(n,m) \times \Mat(r,n) \to \Mat(r,m) .\]
+Dovrebbe essere noto che questa è associativa e che la matrice identità \(I_n \in \Mat(n,n)\) è tale che 
+\begin{align*}
+A I_n = A &\text{ per ogni } A \in \Mat(n,m) \\
+I_n B = B &\text{ per ogni } B \in \Mat(r,n)\,.
+\end{align*}
+La categoria è presto fatta e la indichiamo con \(\Mat\): i numeri interi positivi nel ruolo di oggetti, al variare di \(m\) e \(n\) le matrici \(n \times m\) come frecce da \(m\) a \(n\) e la moltiplicazione tra matrici come composizione; gli assiomi categoriali sono esattamente l'associatività del prodotto tra matrici e il fatto che la matrice identità è identità in senso categoriale.
+\end{esempio}
+
+\begin{esempio}[Insiemi preordinati come categorie]\label{esempio:PreOrdsAreCats}
+Un insieme \(A\) su cui è definita una relazione \(\leqslant\) tale che
+\begin{enumerate}
+\item per ogni \(x \in A\) si ha \(x \leqslant x\) (riflessività)
+\item per ogni \(x,y,z \in A\) se \(x \leqslant y\) e \(y \leqslant z\), allora \(x \leqslant z\) (transitività)
+\end{enumerate}
+è detto {\em preordinato}. Vogliamo vedere se si può rivedere in luce categoriale questa struttura.\newline
+Ricordiamo a tal fine la natura insiemistica delle relazioni, ovvero \(\leqslant\) è un sottoinsieme di \(A \times A\). Sembra ragionevole pensare di prendere elementi di \(A\) come gli oggetti della categoria che stiamo passo passo costruendo. E le coppie ordinate di \(\leqslant\) sono i nostri candidati a frecce. La (2) definisce una nozione di composizione nell'unico modo sensato: se \((x, y)\) e \((y, x)\) sono in \(\leqslant\), allora pure \((x, z)\) sta in \(\leqslant\), e quindi possiamo porre
+\[(y, z) (x, y) = (x, z) .\]
+Il lavoro è quasi fatto, verifichiamo gli assiomi di categoria. L'associatività è ovvia, in quanto
+\begin{align*}
+& ((c, d)(b, c))(a, b) = (b, d)(a, b) = (a, d) \\
+& (c, d)((b, c)(a, b)) = (c, d)(a, c) = (a, d) \,.
+\end{align*}
+Infine la coppia \((x, x)\) è adatta al ruolo di identità su \(x\): per ogni coppia \((x, y)\) di \(\leqslant\) si ha \((x, y)(x, x) = (x, y)\) mentre per ogni \((z, x)\) di \(\leqslant\) si ha \((x, x)(z, x) = (z, x)\). Ecco l'insieme preordinato \((A, \leqslant)\) visto come una categoria!
+\end{esempio}
+
+%\begin{esempio}[La categoria \(\Dyn\)]
+%Questa categoria è così fatta:
+%\begin{itemize}
+%\item gli oggetti sono tutte e sole le triple \((X, a, s)\), dove \(X\) è un insieme non vuoto, con \(a \in X\) e \(s : X \to X\) una funzione di insiemi;
+%%
+%\item le frecce da \((X, a, s)\) e \((Y, b, t)\) sono tutte e sole le funzioni di insiemi \(f : X \to Y\) per cui commuta
+%\[\begin{tikzcd}[row sep = tiny]
+%& X \ar["s", r] \ar["f", dd] & X \ar["f", dd] \\
+%1 \ar["a", ur] \ar["b", dr, swap] \\
+%& Y \ar["t", r, swap]             & Y
+%\end{tikzcd}\]
+%ovvero \(f(a) = b\) e \(fs = tf\) (nota che gli elementi \(a\) e \(b\) sono visti come funzioni, vedi esempio~\ref{esempio:ElemAsFunc});
+%%
+%\item prese delle frecce
+%\[(X, a, p) \functo{f} (Y, b, q) \functo{g} (Z, c, r)\]
+%la loro composizione è semplicemente la composizione di funzioni di insiemi \(gf\). 
+%\end{itemize}
+%\end{esempio}

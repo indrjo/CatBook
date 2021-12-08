@@ -1,0 +1,182 @@
+% !TEX program = lualatex
+% !TEX root = ../catbook.tex
+% !TEX spellcheck = it_IT
+
+\section{Prodotti e coprodotti}
+
+\begin{definizione}[Prodotti e coprodotti]
+Sia \(\catC\) una categoria e \(\set{x_i}_{i \in I}\) una collezione di suoi oggetti. Un oggetto \(\bar x\) di \(\catC\) con una collezione di frecce \(\set{\prj_i : \bar x \to x_i}_{i \in I}\) di \(\catC\) è un {\em prodotto}\index{prodotto} in \(\catC\) di \(\set{x_i}_{i \in I}\) qualora per ogni oggetto \(a\) di \(\catC\) con una collezione \(\set{f_i : a \to x_i}_{i \in I}\) di frecce di \(\catC\) esiste una e una sola freccia \(h : a \to \bar x\) di \(\catC\) per cui
+\[\begin{tikzcd}[row sep=tiny]
+a \ar["{f_i}", dr] \ar["h",dd, swap] &    \\
+                                    & x_i \\
+\bar x \ar["{\prj_i}", ur, swap]       &
+\end{tikzcd}\]
+commuta per ogni \(i \in I\). Un oggetto \(\underline x\) di \(\catC\) con una collezione \(\set{\inj_i : x_i \to \underline x}_{i \in I}\) di frecce di \(\catC\) è un {\em coprodotto}\index{coprodotto} in \(\catC\) di \(\set{x_i}_{i \in I}\) quando è un prodotto in \(\op\catC\) di \(\set{x_i}_{i \in I}\).
+\end{definizione}
+
+\begin{esercizio}
+Quindi che cos'è un coprodotto, se dovessi spendere molte più parole per definirlo?
+\end{esercizio}
+
+Qui uno potrebbe aspettarsi un qualcosa del tipo \q{i prodotti (coprodotti) sono isomorfi tra di loro}, ma ci sono dei problemi non da poco: per parlare di isomorfismo ci dovrebbe essere, a monte di tutto, una nozione di freccia da un prodotto all'altro; ed un prodotto di una collezione \(\set{x_i}_{i \in I}\) è fatto di un oggetto \(\bar x\) e di una collezione di frecce uscenti \(f_i : \bar x \to x_i\), e quindi è il solo oggetto \(\bar x\). Il problema si risolve costruendo una categoria opportuna in cui accade quello che vogliamo.
+
+\begin{costruzione}[Coni sopra una collezione]
+Sia \(\catC\) una categoria. La {\em categoria dei coni} sopra una collezione \(E \subseteq \obj\catC\) è fatta così:
+%
+\begin{itemize}
+\item gli oggetti sono gli oggetti \(a\) di \(\catC\) con una collezione \(\set{f_x : a \to x}_{x \in E}\) di frecce di \(\catC\) uscenti da \(a\): questa cosa si chiama {\em cono} di vertice \(a\) su \(E\) e la si indica con \(\set{f_x : a \to x}_{x \in E}\);
+%
+\item le frecce da un cono \(\set{f_x : a \to x}_{x \in E}\) ad un cono \(\set{g_x : b \to x}_{x \in E}\) sono tutte e sole le frecce \(h : a \to b\) di \(\catC\) per cui per ogni \(x \in E\) commuta
+\[\begin{tikzcd}[row sep=tiny]
+a \ar["{f_x}", dr] \ar["h",dd, swap] &   \\
+                                     & x \\
+b \ar["{g_x}", ur, swap]             &   \\
+\end{tikzcd}\]
+%
+\item la composizione di due frecce
+\[\set{f_x : a \to x}_{x \in E} \xrightarrow{\ h\ }
+\set{g_x : b \to x}_{x \in E} \xrightarrow{\ k\ }
+\set{h_x : c \to x}_{x \in E}\]
+è esattamente la composizione \(kh : a \to c\) di \(\catC\).
+\end{itemize}
+%
+La verifica degli assiomi categoriali è immediata.
+\end{costruzione}
+
+La definizione di prodotto viene facilmente riformulata in questo modo: un prodotto di \(\set{x_i}_{i \in I}\) è esattamente un oggetto terminale della categoria dei coni su \(\set{x_i}_{i \in I}\). Questo basta per dire a rigore che i prodotti su una stessa collezione sono tra loro isomorfi.
+
+\begin{esercizio}[Coconi sotto una collezione]
+Emula quanto fatto nella costruzione precedente: costruisci una categoria in cui un coprodotto può essere visto come oggetto iniziale.
+\end{esercizio}
+
+Osservando le precedenti costruzioni, è importante notare questo: un isomorfismo di (co)coni, induce un isomorfismo dei rispettivi vertici; mentre, il viceversa non sempre accade.
+
+\begin{esercizio}
+Abbiamo visto che i prodotti (coprodotti) sono oggetti terminali (iniziali) di una categoria ad hoc. Invero, vale anche il viceversa: i terminali (iniziali) possono essere visti come prodotti (coprodotti).
+\end{esercizio}
+
+\begin{esercizio}
+Cos'è il (co)prodotto di una collezione con un solo elemento?
+\end{esercizio}
+
+\begin{esempio}
+Facciamo vedere come il prodotto cartesiano di due insiemi sia prodotto in senso categoriale (e quindi in \(\Set\) i prodotti di due oggetti ci sono).\newline
+Se \(A\) e \(B\) due insiemi, dall'insieme \(A \times B\) partono le funzioni {\em componenti}:
+\begin{align*}
+& p_A : A \times B \to A\,, \ (x, y) \to x \\
+& p_B : A \times B \to B\,, \ (x, y) \to y\,.
+\end{align*}
+Consideriamo ora un qualsiasi insieme \(C\) con una coppia di funzioni uscenti \(f : C \to A\) e \(g : C \to B\): la funzione \(h : C \to A \times B\), \(h(x) \coloneq (f(x), g(x))\) è tale da far commutare
+\[\begin{tikzcd}[row sep=tiny]
+  & C \ar["f", dl, swap] \ar["g", dr] \ar["h", dd]     &   \\
+A &                                                    & B \\
+  & A \times B \ar["{p_A}", ul] \ar["{p_B}", ur, swap] &
+\end{tikzcd}\]
+Facciamo vedere che è l'unica a farlo: a tal scopo sia anche \(h' : C \to A \times B\) tale che \(f = p_A h'\) e \(g = p_B h'\). Abbiamo così che per ogni \(x \in C\)
+\[h(x) = (f(x), g(x)) = (p_A h'(x),p_B h'(x)) = h'(x).\]
+In definitiva, \(A \times B\) con le due funzioni \(p_A\) e \(p_B\) è un prodotto di \(\set{A, B}\).\newline
+Secondo la Teoria degli Insiemi, il coprodotto di due insiemi \(A\) e \(B\) è l'insieme
+\[A + B \coloneq (A \times \set{A}) \cup (B \times \set{B}).\]
+Questo insieme se viene con due funzioni piuttosto naturali
+\begin{align*}
+& q_A : A \to A+B\,, \ q_A(x) \coloneq (x, A) \\
+& q_B : B \to A+B\,, \ q_B(x) \coloneq (x, B)\,.
+\end{align*}
+Sia ora un qualsiasi insieme \(C\) e due funzioni \(f : A \to C\) e \(g : B \to C\): consideriamo così la funzione
+\[h : A+B \to C\,, \ h(x, A) \coloneq f(x)\,, \ h(x, B) \coloneq g(x).\]
+Questa funzione fa commutare
+\[\begin{tikzcd}[row sep=tiny]
+                                      & C                & \\
+A \ar["{q_A}", dr, swap] \ar["f", ur] &                  & B \ar["{q_B}", dl] \ar["g", ul, swap] \\
+                                      & A+B \ar["h", uu] & 
+\end{tikzcd}\]
+Come ti aspetteresti, facciamo vedere che solo \(h\) fa questo. Sia \(h' : A+B \to C\) per cui \(f = h' q_A\) e \(g = h' q_B\). È immediato infatti verificare che \(h = h'\):
+\begin{align*}
+& h(x, A) = f(x) = h'(x, A) \text{ per ogni } x \in A \\
+& h(x, B) = g(x) = h'(x, B) \text{ per ogni } x \in B\,.
+\end{align*}
+Quindi, in questo caso l'insieme \(A+B\) con la coppia di funzioni \(q_A\) e \(q_B\) è un coprodotto di \(\set{A, B}\).
+\end{esempio}
+
+\begin{esercizio}
+Quindi cos'è una coppia ordinata?
+\end{esercizio}
+
+\begin{esercizio}
+In generale, il prodotto cartesiano di una famiglia di insiemi \(\set{X_i}_{i \in I}\) è l'insieme
+\[\prod_{i \in I} X_i \coloneq \set{\left. f : I \to \bigcup_{i \in I} X_i \right\mid f(i) \in X_i \text{ per ogni } i \in I}\,,\]
+i cui elementi si chiamano \(I\)-uple.\footnote{Nel caso finito, prendendo \(I = \set{1, \dots{}, n}\), una \(I\)-upla \(f\) viene scritta sotto forma di \(n\)-upla \((f(1), \dots{}, f(n))\).} A questa si associano le funzioni
+\[p_k : \prod_{i \in I} X_i \to X_k\,, \ p_k(f) \coloneq f(k) \quad \text{per } k \in I.\]
+L'insieme \(\prod_{i \in I} X_i\) affiancato dalle frecce \(\set{p_i}_{i \in I}\) è un prodotto di \(\set{X_i}_{i \in I}\)?\newline
+Nella Teoria degli Insiemi il coprodotto di una famiglia in insiemi \(\set{X_i}_{i \in I}\) è
+\[\coprod_{i \in I} X_i \coloneq \bigcup_{i \in I} X_i \times \set{i}.\]
+Questo insieme se ne viene con funzioni piuttosto naturali, per \(j \in I\),
+\[q_j : X_j \to \coprod_{i \in I} X_i\,, \ q_j(x) \coloneq (x, j).\]
+Anche qui, vedere se \(\coprod_{i \in I} X_i\) con \(\set{q_i}_{i \in I}\) è un coprodotto di \(\set{X_i}_{i \in I}\).
+\end{esercizio}
+
+\begin{esercizio}
+Sia \(\set{X_i}_{i \in I}\) una famiglia di spazi topologici.\newline
+Lo spazio topologico prodotto di \(\set{X_i}_{i \in I}\) è l'insieme \(\prod_{i \in I} X_i\) con la {\em topologia di Tychonoff}, definita come la più piccola delle topologie su \(\prod_{i \in I} X_i\) che rendono continue le funzioni componenti \(p_i\), per \(i \in I\). Mostrare che lo spazio \(\prod_{i \in I} X_i\) con le funzioni continue \(\set{p_i}_{i \in I}\) è un prodotto in \(\Top\). {\color{red} [Non è meglio parlare del prodotto di due spazi topologici, piuttosto che mettere tutto sul generale?]}\newline
+La {\em topologia dell'unione disgiunta}, invece, è la più grande delle topologie su \(\coprod_{i \in I} X_i\) per cui sono continue le iniezioni \(q_i\), al variare di \(i \in I\): come prima, provare che \(\coprod_{i \in I} X_i\) con la topologia dell'unione disgiunta e le iniezioni \(\set{q_i}_{i \in I}\) è un coprodotto in \(\Top\). {\color{red} [Stessa cosa.]}
+\end{esercizio}
+
+\begin{esercizio}
+Sia \(V\) uno spazio vettoriale su campo \(k\) e \(V_1, \dots{}, V_n\) suoi sottospazi: abbiamo così lo {\em spazio vettoriale somma}
+\begin{equation}\sum_{i=1}^n V_n \coloneq \set{v \in V \left\mid \exists v_1 \in V_1, \dots{}, v_n \in V_n : v = \sum_{i=1}^n v_i\right.}\,.\label{eqn:SumVectSpace}\end{equation}
+Lo spazio~\eqref{eqn:SumVectSpace} è detto {\em diretto} quando per ogni \(v \in \sum_{i=1}^n V_i\) sono anche unici i vettori \(v_1 \in V_1, \dots{}, v_n \in V_n\) tali che \(v = \sum_{i=1}^n v_i\); in tal caso, questo spazio si scrive come \(\bigoplus_{i=1}^n V_i\). Questo spazio vettoriale ha sia funzioni componenti che iniezioni:
+\begin{align*}
+& p_j : \bigoplus_{i=1}^n V_i \to V_j\,, \ \sum_{i=1}^n v_i \to v_j \\
+& q_j : V_j \to \bigoplus_{i=1}^n V_i\,, \ v \to v\,.
+\end{align*}
+Far vedere che \(\bigoplus_{i=1}^n V_i\) è un prodotto o un coprodotto in \(\Vect\) a seconda che lo si prenda in esame con \(\set{p_i}_{i=1, \dots, n}\) o \(\set{q_i}_{i=1, \dots, n}\). {\color{red} [Non è meglio che questo sia un esempio?]}
+\end{esercizio}
+
+\begin{esempio}
+Sia \((X, \leqslant)\) un insieme preordinato, visto come categoria ovviamente; sia \(S \subseteq X\) è vediamo cosa sono, se esistono, prodotti e i coprodotti di \(S\).\newline
+Anzitutto, un \(p \in X\) con una collezione di frecce \(p \to x\), una per ogni \(x \in S\) è un \(p \in X\) tale che \(p \leqslant x\) per ogni \(x \in S\). Quindi, un prodotto di \(S\) è un qualche \(p \in X\) soddisfacente le seguenti proprietà
+%
+\begin{enumerate}
+\item \(p \leqslant x\) per ogni \(x \in S\)
+\item per ogni \(c \in X\) per cui \(c \leqslant x\) per ogni \(x \in S\) si ha \(c \leqslant p\).
+\end{enumerate}
+%
+Vediamo ora cosa può essere un coprodotto di \(S\). Un \(q \in X\) con frecce \(x \to q\), una per ogni \(x \in S\), è un \(q \in X\) tale che \(x \leqslant q\) per ogni \(x \in S\). Analogamente a prima, un coprodotto di \(S\) è un \(q \in X\) tale che
+%
+\begin{enumerate}
+\item \(x \leqslant q\) per ogni \(x \in S\)
+\item per ogni \(c \in X\) per cui \(x \leqslant c\) per ogni \(x \in S\) si ha \(q \leqslant c\).
+\end{enumerate}
+%
+Nella Teoria degli Insiemi, i prodotti sono detti {\em estremi inferiori}, mentre i coprodotti sono chiamati {\em estremi superiori}. Come in generale, i prodotti e i coprodotti sono unici a meno di isomorfismi; tuttavia, nel caso in cui \((X, \leqslant)\) sia un insieme ordinato (cioè nel quale l'isomorfismo è uguaglianza), se esistono, i prodotti e i coprodotti sono unici. In questo caso, il prodotto e il coprodotto di \(S\) si indicarli con \(\inf S\) e \(\sup S\) rispettivamente.\newline
+L'insieme \(\setR\) con l'usuale ordine \(\leq\) è un insieme ordinato. La cosa interessante di questo insieme è la completezza: ogni insieme inferiormente limitato ha estremo inferiore e ogni insieme superiormente limitato ha estremo superiore. Non è un fatto scontato questo: per esempio in \((\mathbb Q, \leq)\) queste cose non succedono!
+\end{esempio}
+
+\begin{esercizio}
+Prendi \(\setN\) con la relazione di divisibilità \(\divides\):
+\[\forall m, n \in \setN : m \divides n \xLeftrightarrow{\text{def}} \exists k \in \setN : mk = n.\]
+Questa relazione è d'ordine. Dimostrare che esistono e sono unici i prodotti e i coprodotti di \((\setN, \divides)\). A proposito, cosa sono precisamente?
+\end{esercizio}
+
+%\begin{esempio}[Algebre di Heyting]
+%Un {\em reticolo} è un insieme ordinato \((X, \leqslant)\) che ha prodotti e coprodotti di ciascuna coppia di suoi elementi. In questo contesto, il prodotto di due elementi \(a, b \in X\) si scrive come \(a \land b\), mentre il coprodotto si indica con \(a \lor b\). Un reticolo che ha anche oggetti terminale ed iniziale si dice {\em limitato}. È uso abbastanza diffuso indicare con \(\upvdash\) il minimo e \(\downvdash\) il massimo; esistono anche \(0\) e \(1\) per chiamare il minimo e il massimo.
+%\end{esempio}
+
+\begin{esercizio}
+Questo esercizio è ambientato in una qualche categoria, non importa quale; il tutto accade lì dentro. Siano \(x_1\), \(x_2\) e \(x_3\) degli oggetti, \(x_1 \times x_2\) un oggetto con le frecce uscenti
+\[x_1 \lfuncto{p_1} x_1 \times x_2 \functo{p_2} x_2\]
+un prodotto di \(\set{x_1, x_2}\) e \((x_1 \times x_2) \times x_3\) un oggetto con le frecce
+\[x_1 \times x_2 \lfuncto{p_{12}} (x_1 \times x_2) \times x_3 \functo{p_3} x_3\]
+un prodotto di \(\set{x_1 \times x_2, x_3}\). Dimostrare che \((x_1 \times x_2) \times x_3\) con opportune frecce è un prodotto di \(\set{x_1, x_2, x_3}\). (Parte dell'esercizio è capire quali sono queste frecce.) Ora prendi un prodotto di \(\set{x_2, x_3}\) fatto di un oggetto chiamato \(x_2 \times x_3\) con frecce
+\[x_2 \lfuncto{p_2} x_2 \times x_3 \functo{p_3} x_3\]
+e un prodotto di \(\set{x_1, x_2 \times x_3}\) consistente di un oggetto scritto come \(x_1 \times (x_2 \times x_3)\) e di due frecce
+\[x_1 \lfuncto{p_1} x_1 \times (x_2 \times x_3) \functo{p_{23}} x_2 \times x_3.\]
+Come prima mostra che \(x_1 \times (x_2 \times x_3)\), affiancato da opportune frecce uscenti, è un prodotto di \(\set{x_1, x_2, x_3}\).\newline
+Da questo esercizio deduci che
+\[(x_1 \times x_2) \times x_3 \cong x_1 \times (x_2 \times x_3)\]
+ovvero una sorta di \q{associatività del prodotto (binario)}.
+\end{esercizio}
+
+\begin{esercizio}
+Riusciresti a fare una cosa simile per il coprodotto di tre oggetti?
+\end{esercizio}
